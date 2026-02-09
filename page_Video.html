@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.12 Информационное видео</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/video.css">
+    <link rel="icon" href="img/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body class="page-video">
+    <!-- ОБНОВЛЕННЫЙ HEADER С БУРГЕРОМ -->
+    <!-- ЗАМЕНИТЬ ВЕСЬ HEADER СТРАНИЦЫ ВИДЕО НА ЭТОТ: -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <!-- НАВИГАЦИОННЫЕ КНОПКИ КАК В ТЕХНОЛОГИЯХ -->
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        На главную
+                    </a>
+                    <a href="page_Technologies.html" class="nav-btn">
+                        <i class="fas fa-cogs"></i>
+                        Технологии и расчёты
+                    </a>
+                </div>
+
+                <!-- ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК -->
+                <div class="header-info">
+                    <h1>Информационное видео</h1>
+                    <p>Наглядные видео процессов выполнения различных видов работ</p>
+                </div>
+                
+                <!-- БУРГЕР ДЛЯ ФИЛЬТРОВ (НЕ РАСТЯНУТЫЙ) -->
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-th-large"></i>
+                    Категории
+                </button>
+            </div>
+            
+            <!-- ФИЛЬТРЫ ВИДЕО -->
+            <div class="video-filters">
+                <button class="filter-btn active" data-filter="all">Все видео</button>
+                <button class="filter-btn" data-filter="floor">Полы</button>
+                <button class="filter-btn" data-filter="cutting">Алмазная резка</button>
+                <button class="filter-btn" data-filter="drywall">ГКЛ работы</button>
+                <button class="filter-btn" data-filter="soundproofing">Звукоизоляция</button>
+                <button class="filter-btn" data-filter="plastering">Шпаклевка</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="video-main">
+        <div class="container">
+            <!-- Основной контент видео -->
+            <div class="videos-grid">
+
+                <!-- Видео : Резка (локальное) -->
+                <div class="video-card" data-category="cutting" data-source="local" data-video-id="video/info/cutting/Dry Electric Cutter.mp4">
+                    <div class="video-thumbnail">
+                        <img
+                            src="img/previews/cutting-dry.webp"
+                            alt="Алмазная резка"
+                            class="video-preview"
+                            loading="lazy"
+                        >
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Алмазная резка</h3>
+                        <p>Точная резка электрическим инструментом</p>
+                        <div class="video-meta">
+                            <span class="video-category">Резка</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео Резка стен -->
+                <div class="video-card" data-category="cutting" data-source="youtube" data-video-id="torcUXDYwUo">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/torcUXDYwUo/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Резка бетонных стен</h3>
+                        <p>Создание технологических проёмов в несущих стенах</p>
+                        <div class="video-meta">
+                            <span class="video-category">Резка</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео 8: YouTube видео звукоизоляция -->
+                <div class="video-card" data-category="soundproofing" data-source="youtube" data-video-id="SI8EctbzlPM">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/SI8EctbzlPM/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Звукоизоляция Tecsound</h3>
+                        <p>Монтаж звукоизоляционной мембраны</p>
+                        <div class="video-meta">
+                            <span class="video-category">Полы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео 8: YouTube видео полы -->
+                <div class="video-card" data-category="floor" data-source="youtube" data-video-id="6SFo4zYwvT4">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/6SFo4zYwvT4/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Как выполнить отделку бетона</h3>
+                        <p>4 основных навыка для начинающих по отделке бетона</p>
+                        <div class="video-meta">
+                            <span class="video-category">Полы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео 8: YouTube видео полы мозаика -->
+                <div class="video-card" data-category="floor" data-source="youtube" data-video-id="0FUrK4wMqHo">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/0FUrK4wMqHo/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Устройство полов-терраццо</h3>
+                        <p>Технология производства терраццо остается практически неизменной с римских времен, что делает такой пол не просто покрытием, а инвестицией в столетия.</p>
+                        <div class="video-meta">
+                            <span class="video-category">Полы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео 8: YouTube видео полы линолеум -->
+                <div class="video-card" data-category="floor" data-source="youtube" data-video-id="vehbGLdmG7c">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/vehbGLdmG7c/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Укладка линолеума мармолеума методом «плотной стыковки»</h3>
+                        <p>Укладка линолеума методом плотной стыковки (сварка не применяется)</p>
+                        <div class="video-meta">
+                            <span class="video-category">Полы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео 8: YouTube видео полы линолеум -->
+                <div class="video-card" data-category="floor" data-source="youtube" data-video-id="AIcs0NfnNxs">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/AIcs0NfnNxs/hqdefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Укладка коммерческого линолеума</h3>
+                        <p>Технология укладки линолеума во влажных помещениях</p>
+                        <div class="video-meta">
+                            <span class="video-category">Полы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео ГКЛ -->
+                <div class="video-card" data-category="drywall" data-source="youtube" data-video-id="i7jZ9suB9y8">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/i7jZ9suB9y8/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Монтаж облицовочных стен с каркасом</h3>
+                        <p>Создание каркасных конструкций из гипсокартона</p>
+                        <div class="video-meta">
+                            <span class="video-category">ГКЛ работы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео ГКЛ -->
+                <div class="video-card" data-category="drywall" data-source="youtube" data-video-id="znGMjhkfhsM">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/znGMjhkfhsM/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Монтаж каркасных перегородок (двухслойная облицовка)</h3>
+                        <p>Быстровозводимые перегородки: каркас + ГКЛ + шумоизоляция. Хорошая несущая способность, скрытые коммуникации, не нагружают перекрытия.</p>
+                        <div class="video-meta">
+                            <span class="video-category">ГКЛ работы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео ГКЛ -->
+                <div class="video-card" data-category="drywall" data-source="youtube" data-video-id="uoU_BlY_2Lw">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/uoU_BlY_2Lw/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Монтаж каркасных перегородок с проемом (двухслойная облицовка)</h3>
+                        <p>Основы создания дверных проемов в двухслойных гипсокартонных перегородках</p>
+                        <div class="video-meta">
+                            <span class="video-category">ГКЛ работы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео ГКЛ -->
+                <div class="video-card" data-category="drywall" data-source="youtube" data-video-id="obvKgvIv_Vg">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/obvKgvIv_Vg/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Монтажу подвесных потолков из гипсокартона</h3>
+                        <p>Инструкция по монтажу подвесных потолков из гипсокартона на двухуровневом каркасе</p>
+                        <div class="video-meta">
+                            <span class="video-category">ГКЛ работы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео ГКЛ -->
+                <div class="video-card" data-category="drywall" data-source="youtube" data-video-id="jcvno6SMrBM">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/jcvno6SMrBM/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Отделка мансарды гипсокартоном: монтаж и утепление</h3>
+                        <p>Основы утепления и отделки мансарды с использованием гипсокартона</p>
+                        <div class="video-meta">
+                            <span class="video-category">ГКЛ работы</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Видео : YouTube видео шпаклевка -->
+                <div class="video-card" data-category="plastering" data-source="youtube" data-video-id="3I3GasNSKAw">
+                    <div class="video-thumbnail">
+                        <div class="youtube-preview">
+                            <img src="https://img.youtube.com/vi/3I3GasNSKAw/sddefault.jpg"
+                            alt="Как выполнить отделку бетона"
+                            loading="lazy"
+                            >
+                            <div class="youtube-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                        </div>
+
+                        <div class="video-overlay">
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+
+                        <span class="video-source-badge youtube-badge">YouTube</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Шпаклевка Uniflott</h3>
+                        <p>Технология нанесения шпаклевки Knauf Uniflott</p>
+                        <div class="video-meta">
+                            <span class="video-category">Шпаклевка</span>
+                            <span class="video-source">YouTube</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Модальное окно для видео -->
+            <div id="videoModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="modal-body" id="modalBody">
+                        <!-- Видео будет загружено динамически -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright-text">&copy; 2026. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

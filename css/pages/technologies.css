@@ -1,0 +1,1201 @@
+/* =====================
+   PAGE: TECHNOLOGIES
+===================== */
+
+/* ИСПОЛЬЗУЕМ ПЕРЕМЕННЫЕ ИЗ ГЛАВНОЙ */
+.page-technologies {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: "Roboto", sans-serif;
+}
+
+/* ВЕРТИКАЛЬНЫЙ РИТМ СЕКЦИЙ */
+.page-technologies .content-block {
+    scroll-margin-top: 150px;
+    margin-top: 70px; /* Воздух между секциями */
+}
+/* СКРОЛЛ ПО СЕКЦИЯМ. ПОИСК ОГЛАВЛЕНИЙ */
+
+.page-technologies section[id] {
+    position: relative;
+}
+
+.page-technologies section[id]::before {
+    content: "";
+    display: block;
+    height: 140px;      /* высота header */
+    margin-top: -50px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* HEADER - ЕДИНЫЙ С ГЛАВНОЙ */
+.page-technologies .main-header {
+    background: var(--bg-white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 140px;
+}
+
+.page-technologies .main-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-technologies .nav-container {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+.page-technologies .header-info {
+    flex: 1;
+    text-align: center;
+    margin: 0 2rem;
+}
+
+.page-technologies .header-info h1 {
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.page-technologies .header-info h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-accent), var(--primary-accent-light));
+    border-radius: 2px;
+}
+
+.page-technologies .header-info p {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin-top: 10px;
+}
+
+/* НАВИГАЦИОННЫЕ КНОПКИ - ЕДИНЫЕ С ГЛАВНОЙ */
+.page-technologies .nav-buttons {
+    display: none; /* Показываем в медиа-запросах */
+}
+
+.page-technologies .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 2px solid var(--border-light);
+    cursor: pointer;
+    white-space: nowrap;
+    background: var(--bg-white);
+    color: var(--primary-accent);
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .nav-btn:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* МОБИЛЬНОЕ МЕНЮ - ЕДИНОЕ С ГЛАВНОЙ */
+.page-technologies .mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.page-technologies .mobile-menu-toggle:hover {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.page-technologies .mobile-menu-toggle.active {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+}
+
+.page-technologies .mobile-menu-toggle i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+.page-technologies .menu-wrapper {
+    position: relative;
+}
+
+/* КОНТЕНТ БЛОКИ */
+.page-technologies .content-block {
+    scroll-margin-top: 150px;
+}
+
+.page-technologies .block-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.page-technologies .block-header i {
+    font-size: 1.8rem;
+    color: var(--primary-accent);
+}
+
+.page-technologies .block-header h2 {
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.page-technologies .block-text {
+    background: var(--neutral-sand);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    width: 100%;
+}
+
+.page-technologies .block-text p {
+    text-align: left;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+/* МЕНЮ СЕРВИСОВ */
+.page-technologies .services-menu h3 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.page-technologies .menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.page-technologies .menu-category {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-white);
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .category-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.2rem;
+    background: var(--neutral-sand);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.page-technologies .category-title:hover {
+    background: var(--neutral-beige);
+}
+
+.page-technologies .category-title i:first-child {
+    color: var(--primary-accent);
+    width: 16px;
+    font-size: 1rem;
+}
+
+.page-technologies .category-title .fa-chevron-down {
+    margin-left: auto;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    color: var(--text-light);
+    font-weight: 900;
+}
+
+.page-technologies .menu-category.active .category-title .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.page-technologies .category-list {
+    display: none;
+    background: var(--bg-white);
+}
+
+.page-technologies .menu-category.active .category-list {
+    display: block;
+}
+
+/* Подкатегории */
+.page-technologies .menu-subcategory {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.page-technologies .subcategory-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.page-technologies .subcategory-title:hover {
+    background: rgba(230, 126, 34, 0.05);
+}
+
+.page-technologies .subcategory-title i:first-child {
+    color: var(--primary-accent);
+    font-size: 0.9rem;
+}
+
+.page-technologies .subcategory-title .fa-chevron-down {
+    margin-left: auto;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--text-light);
+    font-weight: 900;
+}
+
+.page-technologies .menu-subcategory.active .subcategory-title .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.page-technologies .subcategory-list {
+    display: none;
+    background: var(--neutral-sand);
+}
+
+.page-technologies .menu-subcategory.active .subcategory-list {
+    display: block;
+}
+
+/* Элементы меню */
+.page-technologies .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-medium);
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-white);
+}
+
+.page-technologies .menu-item:last-child {
+    border-bottom: none;
+}
+
+.page-technologies .menu-item:hover {
+    background: rgba(230, 126, 34, 0.05);
+    color: var(--primary-accent);
+}
+
+.page-technologies .menu-item i {
+    font-size: 0.9rem;
+    width: 16px;
+    color: var(--primary-accent);
+}
+
+.page-technologies .menu-subitem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.2rem 0.8rem 2.2rem;
+    background: var(--neutral-sand);
+    font-size: 0.85rem;
+    font-weight: 400;
+    border-bottom: 1px solid var(--border-light);
+    text-decoration: none;
+    color: var(--text-medium);
+    transition: var(--transition);
+}
+
+.page-technologies .menu-subitem:hover {
+    background: rgba(230, 126, 34, 0.05);
+    color: var(--primary-accent);
+}
+
+.page-technologies .menu-subitem:before {
+    content: "›";
+    color: var(--primary-accent);
+    font-weight: bold;
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.page-technologies .subcategory-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+}
+
+.page-technologies .subcategory-link:hover {
+    color: var(--primary-accent);
+}
+
+/* ПРАЙС ТАБЛИЦЫ */
+.page-technologies .price-category-container {
+    border: 1px solid var(--border-light);
+    padding: 12px;
+    margin: 20px 0;
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .price-category-container .category-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 8px 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary-accent);
+    line-height: 1.2;
+    color: var(--primary-dark);
+}
+
+.page-technologies .price-note {
+    background: var(--neutral-sand);
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-left: 3px solid var(--primary-accent);
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+/* Основные таблицы */
+.page-technologies .comparison-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem 0;
+}
+
+.page-technologies .comparison-table table {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.page-technologies .comparison-table th {
+    background: var(--neutral-sand);
+    color: var(--text-dark);
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    vertical-align: top;
+    border-bottom: 2px solid var(--primary-accent);
+}
+
+.page-technologies .comparison-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.page-technologies .comparison-table tr:hover {
+    background: rgba(230, 126, 34, 0.03);
+}
+
+.page-technologies .comparison-table td:first-child {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.page-technologies .comparison-table td:first-child i {
+    margin-right: 0.5rem;
+    width: 16px;
+    color: var(--primary-accent);
+}
+
+/* Ценовые таблицы */
+.page-technologies .price-responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+.page-technologies .price-responsive-table th,
+.page-technologies .price-responsive-table td {
+    border: 1px solid var(--border-light);
+    vertical-align: top;
+    padding: 6px 8px;
+    line-height: 1.3;
+}
+
+.page-technologies .price-responsive-table th:nth-child(1),
+.page-technologies .price-responsive-table td:nth-child(1) {
+    width: 60%;
+    text-align: left;
+    padding-left: 8px;
+}
+
+.page-technologies .price-responsive-table th:nth-child(2),
+.page-technologies .price-responsive-table td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+    padding: 6px 4px;
+}
+
+.page-technologies .price-responsive-table th:nth-child(3),
+.page-technologies .price-responsive-table td:nth-child(3) {
+    width: 25%;
+    text-align: right;
+    padding-right: 8px;
+}
+
+.page-technologies .price-responsive-table th {
+    background: var(--neutral-sand);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Секция дополнительного прайсинга */
+.page-technologies .pricing-section {
+    margin: 20px 0;
+}
+
+.page-technologies .additional-pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.page-technologies .simple-table,
+.page-technologies .hourly-work {
+    background: var(--neutral-sand);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .simple-table h4,
+.page-technologies .hourly-work h4 {
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.page-technologies .price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-light);
+}
+
+.page-technologies .price-row:last-child {
+    border-bottom: none;
+}
+
+.page-technologies .price-label {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.page-technologies .price-amount {
+    color: var(--text-dark);
+    font-weight: 600;
+    text-align: right;
+}
+
+.page-technologies .hourly-info {
+    text-align: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--bg-white);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .hourly-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+}
+
+.page-technologies .hourly-desc {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+}
+
+/* СПИСКИ */
+.page-technologies ol {
+    counter-reset: item;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.page-technologies ol > li {
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.page-technologies ol > li:before {
+    counter-increment: item;
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-dark);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.page-technologies ol > li h3 {
+    font-size: 22px;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.page-technologies ul {
+    list-style-type: none;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.page-technologies ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.page-technologies ul li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-dark);
+    border-radius: 50%;
+}
+
+/* Пустые точки */
+.page-technologies ul.empty-dots {
+    list-style-type: none;
+    margin-top: 5px;
+    padding-left: 10px;
+}
+
+.page-technologies ul.empty-dots li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.page-technologies ul.empty-dots li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+    border: 2px solid var(--primary-dark);
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+/* Шаги процесса */
+.page-technologies .process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.page-technologies .process-step {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .step-header {
+    margin-bottom: 1rem;
+}
+
+.page-technologies .step-header h4 {
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.page-technologies .step-content p {
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+.page-technologies .conclusion-note {
+    background: var(--neutral-sand);
+    border-left: 3px solid var(--primary-accent);
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    border-radius: 6px;
+}
+
+.page-technologies .conclusion-note p {
+    margin: 0;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+/* Блоки преимуществ */
+.page-technologies .features-section {
+    margin-top: 2rem;
+}
+
+.page-technologies .feature-block {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: var(--neutral-sand);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.page-technologies .feature-block h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.page-technologies .feature-block h3 i {
+    color: var(--primary-accent);
+}
+
+.page-technologies .feature-block ul {
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.page-technologies .feature-block li {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.page-technologies .feature-block strong {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.page-technologies .feature-block p {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+/* Специфичные стили для секций */
+.page-technologies #polished-frezering .process-step {
+    margin-bottom: 10px;
+}
+
+.page-technologies #polished-frezering .process-step:last-child {
+    margin-bottom: 0;
+}
+
+.page-technologies .polished-frezering-section h3 {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.page-technologies .polished-frezering-section ul {
+    margin-top: 0px;
+}
+
+.page-technologies .polished-frezering-section ul h3 {
+    margin-bottom: 15px;
+}
+
+/* Подсветка при скролле */
+.page-technologies .price-highlight {
+    animation: highlightFade 2s ease;
+}
+
+@keyframes highlightFade {
+    0%   { background-color: rgba(230, 126, 34, 0.2); }
+    100% { background-color: transparent; }
+}
+
+/* ===== ДЕСКТОПНАЯ ВЕРСИЯ (969px и выше) ===== */
+@media (min-width: 969px) {
+    .page-technologies .menu-wrapper {
+        position: fixed;
+        top: 150px;
+        left: 0;
+        width: 300px;
+        height: calc(100vh - 150px);
+        z-index: 99;
+    }
+    
+    .page-technologies .services-menu {
+        width: 100%;
+        height: 100%;
+        background: var(--bg-white);
+        border-right: 1px solid var(--border-light);
+        box-shadow: var(--shadow);
+        overflow-y: auto;
+        padding: 1.5rem;
+    }
+    
+    .page-technologies .main-content {
+        margin-left: 300px;
+        width: calc(100% - 300px);
+    }
+    
+    .page-technologies .main-footer {
+        margin-left: 300px;
+    }
+    
+    .page-technologies .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 2rem;
+        pointer-events: none;
+    }
+    
+    .page-technologies .nav-btn {
+        pointer-events: auto;
+        z-index: 1;
+    }
+    
+    .page-technologies .header-info p {
+        font-size: 0.95rem;
+        line-height: 1.3;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .page-technologies .mobile-menu-toggle {
+        display: none;
+    }
+    
+    /* Прокрутка для десктопа */
+    .page-technologies .services-menu::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .page-technologies .services-menu::-webkit-scrollbar-track {
+        background: var(--neutral-sand);
+        border-radius: 3px;
+    }
+    
+    .page-technologies .services-menu::-webkit-scrollbar-thumb {
+        background: var(--primary-accent);
+        border-radius: 3px;
+    }
+    
+    .page-technologies .services-menu::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-accent);
+    }
+}
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 968px) ===== */
+@media (max-width: 968px) {
+    .page-technologies .nav-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        padding-bottom: 0.5rem;
+        min-height: 80px;
+    }
+    
+    .page-technologies .nav-buttons {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        padding-bottom: 0;
+        justify-content: center;
+        width: 100%;
+        order: 1;
+        margin-bottom: 0rem;
+    }
+    
+    .page-technologies .nav-btn {
+        flex: 1;
+        min-width: 110px;
+        justify-content: center;
+        padding: 0.5rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    .page-technologies .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        order: 3;
+        margin-top: 0.5rem;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .page-technologies .mobile-menu-toggle i {
+        margin-right: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .page-technologies .header-info {
+        margin: 0;
+        order: 2;
+        width: 100%;
+    }
+    
+    .page-technologies .header-info h1 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        margin-top: 0.3rem;
+    }
+    
+    .page-technologies .header-info p {
+        font-size: 0.85rem;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+    
+    .page-technologies .menu-wrapper {
+        position: sticky;
+        top: 150px;
+        z-index: 1000;
+        background: var(--bg-white);
+    }
+    
+    .page-technologies .services-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        z-index: 1001;
+        padding: 1rem;
+        box-shadow: var(--shadow-strong);
+        display: none;
+        max-height: 70vh;
+        overflow-y: auto;
+        border-radius: 0 0 8px 8px;
+        border: 1px solid var(--border-light);
+    }
+    
+    .page-technologies .services-menu.active {
+        display: block;
+    }
+    
+    .page-technologies .main-content {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 160px;
+    }
+    
+    .page-technologies .main-footer {
+        margin-left: 0;
+    }
+}
+
+/* АДАПТИВНОСТЬ ТАБЛИЦ */
+@media (max-width: 768px) {
+    .page-technologies .process-steps {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .page-technologies .content-block {
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .page-technologies .block-text {
+        padding: 0.5rem;
+    }
+
+    .page-technologies .content-wrapper {
+        padding: 0.5rem;
+        margin-top: 160px;
+    }
+    
+    .page-technologies .block-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .page-technologies .block-header-title {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .page-technologies .price-responsive-table {
+        font-size: 12px;
+        margin: 4px 0;
+    }
+    
+    .page-technologies .price-responsive-table th,
+    .page-technologies .price-responsive-table td {
+        padding: 2px 3px;
+        line-height: 1.1;
+    }
+    
+    .page-technologies .price-responsive-table th:nth-child(1),
+    .page-technologies .price-responsive-table td:nth-child(1) {
+        padding-left: 3px;
+    }
+    
+    .page-technologies .price-responsive-table th:nth-child(2),
+    .page-technologies .price-responsive-table td:nth-child(2) {
+        padding: 2px 1px;
+        font-size: 11px;
+    }
+    
+    .page-technologies .price-responsive-table th:nth-child(3),
+    .page-technologies .price-responsive-table td:nth-child(3) {
+        padding-right: 3px;
+        font-size: 11px;
+    }
+    
+    .page-technologies .price-category-container {
+        padding: 4px;
+        margin: 8px 0;
+    }
+    
+    .page-technologies .price-category-container .category-title {
+        font-size: 14px;
+        margin: 4px 0 2px;
+        padding-bottom: 2px;
+    }
+    
+    .page-technologies .price-note {
+        padding: 8px;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-technologies .nav-container {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    
+    .page-technologies .header-info h1 {
+        font-size: 1rem;
+    }
+    
+    .page-technologies .header-info p {
+        font-size: 0.8rem;
+    }
+    
+    .page-technologies .nav-buttons {
+        gap: 0.75rem;
+    }
+    
+    .page-technologies .nav-btn {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.7rem;
+        max-width: 130px;
+    }
+    
+    .page-technologies .content-block {
+        padding: 0.75rem;
+    }
+    
+    .page-technologies .block-text {
+        padding: 1rem;
+    }
+    
+    .page-technologies .price-responsive-table {
+        font-size: 11px;
+        margin: 3px 0;
+    }
+    
+    .page-technologies .price-responsive-table th,
+    .page-technologies .price-responsive-table td {
+        padding: 1px 2px;
+    }
+    
+    .page-technologies .price-responsive-table th:nth-child(2),
+    .page-technologies .price-responsive-table td:nth-child(2) {
+        padding: 1px 0px;
+        font-size: 10px;
+    }
+    
+    .page-technologies .price-responsive-table th:nth-child(3),
+    .page-technologies .price-responsive-table td:nth-child(3) {
+        padding-right: 2px;
+        font-size: 10px;
+    }
+    
+    .page-technologies .price-category-container {
+        padding: 3px;
+        margin: 6px 0;
+    }
+    
+    .page-technologies .price-category-container .category-title {
+        font-size: 13px;
+        margin: 3px 0 1px;
+        padding-bottom: 1px;
+    }
+    
+    .page-technologies .price-note {
+        padding: 6px;
+        margin-top: 6px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 375px) {
+    .page-technologies .nav-container {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .page-technologies .header-info h1 {
+        font-size: 0.9rem;
+    }
+    
+    .page-technologies .header-info p {
+        font-size: 0.7rem;
+    }
+    
+    .page-technologies .nav-buttons {
+        gap: 0.5rem;
+    }
+    
+    .page-technologies .nav-btn {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.7rem;
+        max-width: 130px;
+    }
+    
+    .page-technologies .price-responsive-table {
+        font-size: 10px;
+        margin: 2px 0;
+    }
+    
+    .page-technologies .price-responsive-table th,
+    .page-technologies .price-responsive-table td {
+        padding: 1px 1px;
+    }
+    
+    .page-technologies .price-category-container {
+        padding: 2px;
+        margin: 4px 0;
+    }
+    
+    .page-technologies .price-category-container .category-title {
+        font-size: 12px;
+        margin: 2px 0 1px;
+    }
+}
+
+@media (max-width: 320px) {
+    .page-technologies .price-responsive-table {
+        font-size: 10px;
+        margin: 3px 0;
+    }
+    
+    .page-technologies .price-responsive-table th,
+    .page-technologies .price-responsive-table td {
+        padding: 1px 2px;
+    }
+    
+    .page-technologies .price-category-container {
+        padding: 2px;
+        margin: 2px 0;
+    }
+    
+    .page-technologies .price-category-container .category-title {
+        font-size: 12px;
+        margin: 2px 0 1px;
+    }
+    
+    .page-technologies .price-note {
+        padding: 4px;
+        margin: 2px 0;
+        font-size: 10px;
+    }
+}
+
+/* FOOTER - ЕДИНЫЙ */
+.page-technologies footer {
+    background: linear-gradient(135deg, var(--primary-dark), #34495E);
+    color: var(--bg-white);
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+    border-top: 6px solid var(--primary-accent);
+    position: relative;
+    overflow: hidden;
+}

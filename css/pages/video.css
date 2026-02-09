@@ -1,0 +1,648 @@
+/* =====================
+   PAGE: VIDEO
+===================== */
+
+/* Специфичные стили видео страницы */
+.page-video .video-main {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+/* Фильтры видео */
+.page-video .video-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: var(--neutral-sand);
+    border-top: 1px solid var(--border-light);
+    transition: var(--transition);
+}
+
+/* Эффекты видео карточек */
+.page-video .video-card:hover h3 {
+    color: var(--primary-accent);
+}
+
+/* Миниатюра видео */
+.page-video .video-thumbnail {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #000;
+    flex-shrink: 0;
+}
+
+.page-video .video-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.page-video .video-card:hover .video-preview {
+    transform: scale(1.05);
+}
+
+/* YOUTUBE ПРЕВЬЮ */
+.page-video .youtube-preview {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    overflow: hidden;
+}
+
+.page-video .youtube-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.page-video .video-card:hover .youtube-preview img {
+    transform: scale(1.05);
+}
+
+/* YOUTUBE ИКОНКА */
+.page-video .youtube-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: var(--youtube-red);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: var(--transition);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+}
+
+.page-video .video-card:hover .youtube-icon {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.94));
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* БЕЙДЖ ИСТОЧНИКА */
+.page-video .video-source-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--youtube-red), var(--youtube-dark));
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ОВЕРЛЕЙ С КНОПКОЙ PLAY */
+.page-video .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.page-video .video-card:hover .video-overlay {
+    opacity: 1;
+}
+
+/* КНОПКА PLAY */
+.page-video .play-btn {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.page-video .video-card[data-source="youtube"] .play-btn {
+    background: linear-gradient(135deg, var(--youtube-red), var(--youtube-dark));
+}
+
+.page-video .play-btn:hover {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+    transform: scale(1.08);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+.page-video .video-card[data-source="youtube"] .play-btn:hover {
+    background: linear-gradient(135deg, var(--youtube-dark), #b30000);
+}
+
+/* ИНФОРМАЦИЯ О ВИДЕО */
+.page-video .video-info {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-video .video-info h3 {
+    margin: 0 0 0.8rem 0;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    min-height: 3.2em;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.page-video .video-info p {
+    margin: 0 0 1rem 0;
+    color: var(--text-medium);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex: 1;
+    min-height: 4.5em;
+}
+
+.page-video .video-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-top: auto;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.page-video .video-category {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2);
+}
+
+.page-video .video-card[data-source="youtube"] .video-category {
+    background: linear-gradient(135deg, var(--youtube-red), var(--youtube-dark));
+}
+
+.page-video .video-source {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+/* Модальное окно видео */
+.page-video .modal-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+.page-video .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-video .modal-body video,
+.page-video .modal-body iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+}
+
+/* ИНДИКАТОР ЗАГРУЗКИ */
+.page-video .video-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    display: none;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.page-video .video-loading.active {
+    display: block;
+}
+
+.page-video .video-loading i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    color: var(--primary-accent);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Десктопная версия */
+@media (min-width: 969px) {
+    .page-video .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 2rem;
+        pointer-events: none;
+    }
+    
+    .page-video .nav-btn {
+        pointer-events: auto;
+        z-index: 1;
+        max-width: 240px;
+    }
+    
+    .page-video .nav-btn:first-child {
+        align-self: flex-start;
+    }
+    
+    .page-video .nav-btn:last-child {
+        align-self: flex-end;
+    }
+    
+    .page-video .mobile-menu-toggle {
+        display: none;
+    }
+    
+    .page-video .header-info p {
+        font-size: 0.95rem;
+        line-height: 1.3;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* Мобильная версия */
+@media (max-width: 968px) {
+    .page-video .nav-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        padding-bottom: 0.5rem;
+        min-height: 80px;
+    }
+    
+    .page-video .nav-buttons {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        padding-bottom: 0;
+        justify-content: center;
+        width: 100%;
+        order: 1;
+        margin-bottom: 0.3rem;
+    }
+    
+    .page-video .nav-btn {
+        flex: 1 1 auto;
+        min-width: 0;
+        justify-content: center;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.75rem;
+        border: 1px solid var(--border-light);
+        white-space: normal;
+        word-wrap: break-word;
+        text-align: center;
+        line-height: 1.1;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    
+    /* ИКОНКИ В КНОПКАХ - ВСЕГДА ВИДНЫ */
+    .page-video .nav-btn i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        min-width: 12px;
+    }
+    
+    .page-video .nav-btn:last-child {
+        font-size: 0.7rem;
+    }
+    
+    .page-video .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        order: 3;
+        margin-top: 0.5rem;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        align-self: center;
+    }
+    
+    .page-video .mobile-menu-toggle i {
+        margin-right: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .page-video .header-info {
+        margin: 0;
+        order: 2;
+        width: 100%;
+    }
+    
+    .page-video .header-info h1 {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+        margin-top: 0.3rem;
+    }
+    
+    .page-video .header-info p {
+        font-size: 0.85rem;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+    
+    /* ФИЛЬТРЫ НА МОБИЛЬНЫХ */
+    .page-video .video-filters {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: var(--bg-white);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-12px);
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        z-index: 99;
+    }
+    
+    .page-video .video-filters.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        max-height: 380px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+    
+    .page-video .filter-btn {
+        width: 100%;
+        max-width: 260px;
+        justify-content: center;
+        text-align: center;
+        padding: 8px 14px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-light);
+        background: var(--bg-white);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .page-video .filter-btn.active {
+        background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+        color: white;
+        border-color: var(--primary-accent);
+        box-shadow: 0 3px 10px rgba(230, 126, 34, 0.2);
+    }
+    
+    .page-video .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    .page-video .video-thumbnail {
+        height: 180px;
+    }
+    
+    /* YOUTUBE ИКОНКА НА МОБИЛЬНЫХ */
+    .page-video .youtube-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+    }
+    
+    /* КНОПКА PLAY НА МОБИЛЬНЫХ - БЕЗ ГРАНИЦ */
+    .page-video .play-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        border: none;
+    }
+    
+    .page-video .video-info {
+        padding: 1.2rem;
+    }
+    
+    .page-video .video-info h3 {
+        font-size: 1.1rem;
+        min-height: auto;
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-video .video-info p {
+        font-size: 0.9rem;
+        min-height: auto;
+        margin-bottom: 0.8rem;
+    }
+    
+    .page-video .video-category {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-video .container {
+        padding: 0 1rem;
+    }
+    
+    .page-video .nav-container {
+        min-height: 100px;
+    }
+    
+    .page-video .nav-buttons {
+        gap: 0.4rem;
+        padding: 0.4rem;
+    }
+    
+    .page-video .nav-btn {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.7rem;
+        gap: 0.25rem;
+    }
+    
+    /* ИКОНКИ МЕНЬШЕ, НО ВСЕ ЕЩЕ ВИДНЫ */
+    .page-video .nav-btn i {
+        font-size: 0.7rem;
+    }
+    
+    .page-video .nav-btn:last-child {
+        font-size: 0.65rem;
+    }
+    
+    .page-video .header-info h1 {
+        font-size: 1.1rem;
+    }
+    
+    .page-video .header-info p {
+        font-size: 0.8rem;
+    }
+    
+    .page-video .mobile-menu-toggle {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .page-video .mobile-menu-toggle i {
+        font-size: 0.75rem;
+    }
+    
+    .page-video .filter-btn {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+        max-width: 240px;
+    }
+    
+    .page-video .video-thumbnail {
+        height: 160px;
+    }
+    
+    .page-video .youtube-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+    
+    .page-video .play-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .page-video .videos-grid {
+        gap: 1rem;
+    }
+    
+    .page-video .video-info {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .page-video .nav-btn {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.65rem;
+        gap: 0.2rem;
+    }
+    
+    /* ИКОНКИ ЕЩЕ МЕНЬШЕ, НО ВСЕ ЕЩЕ ВИДНЫ */
+    .page-video .nav-btn i {
+        font-size: 0.65rem;
+    }
+    
+    .page-video .nav-btn:last-child {
+        font-size: 0.6rem;
+        padding: 0.4rem 0.3rem;
+    }
+    
+    .page-video .mobile-menu-toggle {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .page-video .mobile-menu-toggle i {
+        font-size: 0.7rem;
+    }
+}
+
+/* ТАЧ-УСТРОЙСТВА */
+@media (hover: none) and (max-width: 968px) {
+    .page-video .video-overlay {
+        opacity: 0.85;
+        background: rgba(0, 0, 0, 0.35);
+    }
+    
+    .page-video .play-btn {
+        opacity: 0.95;
+    }
+    
+    .page-video .youtube-icon {
+        opacity: 0.95;
+    }
+}
+
+/* АНИМАЦИЯ ЗАГРУЗКИ ИЗОБРАЖЕНИЙ */
+.page-video img[loading] {
+    background: linear-gradient(90deg, var(--neutral-sand) 25%, var(--neutral-beige) 50%, var(--neutral-sand) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

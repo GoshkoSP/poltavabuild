@@ -1,0 +1,86 @@
+/* =====================
+   BASE (глобальные стили)
+===================== */
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+    /* Основные цвета */
+    --primary-dark: #2C3E50;
+    --primary-accent: #E67E22;
+    --primary-accent-light: #F39C12;
+    --secondary-accent: #D35400;
+    --secondary-accent-dark: #BA4A00;
+    
+    /* Нейтральные цвета */
+    --neutral-beige: #F5F1E8;
+    --neutral-taupe: #8B7D6B;
+    --neutral-concrete: #BDC3C7;
+    --neutral-sand: #ECF0F1;
+    
+    /* Фоны */
+    --bg-white: #FFFFFF;
+    --bg-light: #FDFCFA;
+    --bg-icon: #F8F5F0;
+    
+    /* Текст */
+    --text-dark: #2C3E50;
+    --text-medium: #34495E;
+    --text-light: #7F8C8D;
+    
+    /* Границы */
+    --border-light: #EAE7E0;
+    --border-accent: rgba(230, 126, 34, 0.25);
+    --border-dark: rgba(44, 62, 80, 0.1);
+    
+    /* Эффекты */
+    --shadow: 0 4px 12px rgba(44, 62, 80, 0.08);
+    --shadow-hover: 0 8px 24px rgba(230, 126, 34, 0.15);
+    --shadow-strong: 0 12px 32px rgba(230, 126, 34, 0.2);
+    --transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    --transition-slow: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Дополнительные для страницы технологий */
+    --dark: #333333;
+    --medium: #666666;
+    --light: #999999;
+    --border: #e0e0e0;
+    --background: #f8f8f8;
+    
+    /* Для видео */
+    --youtube-red: #ff0000;
+    --youtube-dark: #cc0000;
+}
+
+/* HTML / BODY */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+
+/* ACCESSIBILITY */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}

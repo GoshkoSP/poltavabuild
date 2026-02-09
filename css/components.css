@@ -1,0 +1,685 @@
+/* =====================
+   COMPONENTS (компоненты)
+===================== */
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-tech, .btn-video, .btn-portfolio {
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+}
+
+.btn-tech:hover, .btn-video:hover, .btn-portfolio:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-video {
+    background: linear-gradient(135deg, #3498DB, #2980B9);
+}
+
+.btn-video:hover {
+    background: linear-gradient(135deg, #2980B9, #1F618D);
+}
+
+.btn-portfolio {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+}
+
+.btn-portfolio:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* Навигационные кнопки */
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 2px solid var(--border-light);
+    cursor: pointer;
+    white-space: nowrap;
+    background: var(--bg-white);
+    color: var(--primary-accent);
+    box-shadow: var(--shadow);
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Кнопка отправки формы */
+.submit-btn {
+    width: 100%;
+    padding: 18px 30px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    position: relative;
+    transition: 
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.submit-btn.loading {
+    opacity: 0.85;
+    cursor: wait;
+}
+
+.submit-btn.success {
+    background: linear-gradient(135deg, #27AE60, #229954);
+}
+
+.submit-btn.error {
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+}
+
+.submit-btn.loading,
+.submit-btn.success,
+.submit-btn.error {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Формы */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-accent);
+    background: var(--bg-white);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+/* Карточки */
+.card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition-slow);
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(44, 62, 80, 0.05)) border-box;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--border-accent);
+}
+
+/* Карточка направления */
+.direction-card {
+    background: var(--bg-white);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition-slow);
+    border: 2px solid var(--border-light);
+    border-top: 6px solid var(--primary-accent);
+    position: relative;
+    overflow: hidden;
+}
+
+.direction-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-accent), var(--primary-accent-light));
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.direction-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--border-accent);
+}
+
+.direction-card:hover::before {
+    transform: translateX(0);
+}
+
+.direction-icon {
+    font-size: 3.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 1.5rem;
+    transition: var(--transition-slow);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(230, 126, 34, 0.1);
+}
+
+/* Карточка услуги */
+.service-main-category {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border-left: 8px solid var(--primary-accent);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-main-category:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong);
+    border-left-color: var(--primary-accent-light);
+}
+
+/* Инфо карточка */
+.info-card {
+    background: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition-slow);
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light)) border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
+/* Карточка портфолио */
+.portfolio-item {
+    background: var(--bg-white);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-slow);
+    box-shadow: var(--shadow);
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(44, 62, 80, 0.05)) border-box;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--border-accent);
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Видео карточка */
+.video-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition-slow);
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(44, 62, 80, 0.05)) border-box;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--border-accent);
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 62, 80, 0.98);
+    animation: fadeIn 0.3s;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    background-color: transparent;
+    margin: 2% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 900px;
+    border-radius: 16px;
+    overflow: hidden;
+    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 80vh;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    transition: var(--transition);
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    box-shadow: var(--shadow-strong);
+}
+
+.close-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+    overflow: auto;
+    background: rgba(44, 62, 80, 0.97);
+}
+
+.lightbox.open {
+    display: block;
+}
+
+.lightbox .close {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    font-size: 36px;
+    cursor: pointer;
+    color: white;
+    z-index: 1001;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.lightbox .close:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: scale(1.1);
+}
+
+/* Фильтры */
+.filter-btn {
+    padding: 12px 24px;
+    background: var(--bg-white);
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-dark);
+    box-shadow: var(--shadow);
+    font-family: inherit;
+}
+
+.filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-accent);
+    background: rgba(230, 126, 34, 0.05);
+}
+
+.filter-btn.active,
+.filter-btn.active:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* Контактные элементы */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 1.1rem;
+    padding: 18px 20px;
+    background: var(--bg-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: var(--primary-accent);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 126, 34, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Мессенджеры */
+.messenger-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 140px;
+    padding: 25px 15px;
+    border-radius: 16px;
+    transition: var(--transition);
+    background: var(--bg-white);
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+}
+
+.messenger-link:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-strong);
+}
+
+.messenger-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 32px;
+    color: var(--bg-white);
+    transition: var(--transition);
+}
+
+/* Бургер меню */
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.mobile-menu-toggle:hover {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.mobile-menu-toggle.active {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+}
+
+.mobile-menu-toggle i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+/* Навигационные кнопки контейнер */
+.nav-buttons {
+    display: none;
+}
+
+/* Адаптивность компонентов */
+@media (max-width: 768px) {
+    .btn, .nav-btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .direction-card,
+    .service-main-category,
+    .info-card {
+        padding: 1.5rem;
+    }
+    
+    .portfolio-item img {
+        height: 200px;
+    }
+    
+    .video-card {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-item {
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .messenger-link {
+        width: 100px;
+        padding: 15px 10px;
+    }
+    
+    .messenger-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
+
+/* =====================
+   COMPONENTS FIXES - УНИФИКАЦИЯ
+===================== */
+
+/* ОБЕСПЕЧИВАЕМ КОНСИСТЕНТНОСТЬ КНОПОК */
+.btn,
+.btn-primary,
+.btn-tech,
+.btn-video,
+.btn-portfolio,
+.nav-btn,
+.filter-btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+}
+
+/* Специфичные стили для кнопок портфолио */
+.btn-portfolio {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+}
+
+.btn-portfolio:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+}
+
+/* Навигационные кнопки */
+.nav-btn {
+    background: var(--bg-white);
+    color: var(--primary-accent);
+}
+
+.nav-btn:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+}
+
+/* Кнопки фильтров */
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+}
+
+/* Центрирование контента на всех страницах */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-header {
+    text-align: center;
+    width: 100%;
+}
+
+/* Обеспечиваем, что все параграфы центрируются */
+p {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}

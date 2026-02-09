@@ -1,0 +1,792 @@
+/* =====================
+   PAGE: PROJECTS
+===================== */
+
+/* HEADER - ЕДИНЫЙ С ГЛАВНОЙ */
+.page-projects .main-header {
+    background: var(--bg-white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 140px;
+}
+
+.page-projects .nav-container {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+.page-projects .header-info {
+    flex: 1;
+    text-align: center;
+    margin: 0 2rem;
+}
+
+.page-projects .header-info h1 {
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.page-projects .header-info h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-accent), var(--primary-accent-light));
+    border-radius: 2px;
+}
+
+.page-projects .header-info p {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin-top: 10px;
+}
+
+/* ФИКС 1: КНОПКИ НАВИГАЦИИ - ВОССТАНАВЛИВАЕМ */
+.page-projects .nav-buttons {
+    display: flex;
+    gap: 15px;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.page-projects .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 2px solid var(--border-light);
+    cursor: pointer;
+    white-space: nowrap;
+    background: var(--bg-white);
+    color: var(--primary-accent);
+    box-shadow: var(--shadow);
+}
+
+.page-projects .nav-btn:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ФИКС 2: БУРГЕР МЕНЮ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ */
+.page-projects .mobile-menu-toggle {
+    display: none; /* По умолчанию скрыт */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.page-projects .mobile-menu-toggle:hover {
+    background: linear-gradient(135deg, var(--primary-accent-light), var(--primary-accent));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.page-projects .mobile-menu-toggle.active {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+}
+
+.page-projects .mobile-menu-toggle i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+}
+
+.page-projects .menu-wrapper {
+    position: relative;
+}
+
+/* Специфичные стили портфолио */
+.page-projects #portfolio {
+    background: var(--bg-light);
+    padding: 60px 20px;
+}
+
+/* ФИКС 2: ФИЛЬТРЫ ПОРТФОЛИО - ВОССТАНАВЛИВАЕМ */
+.page-projects .portfolio-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: var(--neutral-sand);
+    border-top: 1px solid var(--border-light);
+    transition: var(--transition);
+    margin-bottom: 30px;
+}
+
+.page-projects .filter-btn {
+    padding: 12px 24px;
+    background: var(--bg-white);
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-dark);
+    box-shadow: var(--shadow);
+    font-family: inherit;
+}
+
+.page-projects .filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-accent);
+    background: rgba(230, 126, 34, 0.05);
+}
+
+.page-projects .filter-btn.active,
+.page-projects .filter-btn.active:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+    color: white;
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* ФИКС 3-4: ГРИД ПОРТФОЛИО - ИСПРАВЛЯЕМ РАСТЯГИВАНИЕ */
+.page-projects .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: stretch;
+    justify-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-projects .portfolio-item {
+    background: var(--bg-white);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-slow);
+    box-shadow: var(--shadow);
+    position: relative;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(44, 62, 80, 0.05)) border-box;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.page-projects .portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+    border-color: var(--border-accent);
+}
+
+.page-projects .portfolio-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.page-projects .portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Эффекты карточек портфолио */
+.page-projects .portfolio-item:hover h3 {
+    color: var(--primary-accent);
+}
+
+.page-projects .portfolio-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 20px 20px 10px;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.page-projects .portfolio-item p {
+    font-size: 1rem;
+    color: var(--text-medium);
+    padding: 0 20px 20px;
+    margin-top: auto;
+    line-height: 1.6;
+}
+
+/* Индикатор видео на карточке */
+.page-projects .portfolio-item[data-has-video="true"]::before {
+    content: '\f144';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(44, 62, 80, 0.85);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.page-projects .portfolio-item[data-has-video="true"]:hover::before {
+    background: var(--primary-accent);
+    transform: scale(1.1);
+}
+
+/* ФИКС: Организация папок - правильные отступы */
+.page-projects .portfolio-grid .portfolio-item:nth-child(n+4) {
+    margin-top: 0;
+}
+
+/* LIGHTBOX */
+.page-projects .lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+    overflow: auto;
+    background: rgba(44, 62, 80, 0.97);
+}
+
+.page-projects .lightbox.open {
+    display: block;
+}
+
+.page-projects .lightbox .close {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    font-size: 36px;
+    cursor: pointer;
+    color: white;
+    z-index: 1001;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.page-projects .lightbox .close:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: scale(1.1);
+}
+
+/* PREVIEW MODE */
+.page-projects .lightbox .preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+    justify-content: center;
+    gap: 20px;
+    padding: 100px 30px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-projects .media-thumbnail {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 3px solid transparent;
+    background: var(--bg-white);
+    box-shadow: var(--shadow);
+}
+
+.page-projects .media-thumbnail:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 32px rgba(230, 126, 34, 0.3);
+    border-color: var(--primary-accent);
+}
+
+.page-projects .media-thumbnail img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.page-projects .media-thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+/* Видео-миниатюра */
+.page-projects .media-thumbnail.video-thumbnail {
+    border: none;
+}
+
+/* Кнопка play в миниатюрах */
+.page-projects .media-thumbnail .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.page-projects .media-thumbnail:hover .play-icon {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* VIEWER MODE */
+.page-projects .lightbox .viewer {
+    display: none;
+    position: relative;
+    padding-top: 90px;
+}
+
+.page-projects #viewerImage {
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    margin: 0 auto;
+    background: var(--bg-white);
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.page-projects #viewerVideo {
+    display: none;
+    max-width: 90vw;
+    max-height: 80vh;
+    margin: 0 auto;
+    background: #000;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+/* Навигационные кнопки в viewer */
+.page-projects .lightbox .viewer button.prev,
+.page-projects .lightbox .viewer button.next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    border: none;
+    cursor: pointer;
+    color: white;
+    z-index: 1001;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.page-projects .lightbox .viewer button.prev { left: 25px; }
+.page-projects .lightbox .viewer button.next { right: 25px; }
+
+.page-projects .lightbox .viewer button:hover {
+    background: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-dark));
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Сообщения */
+.page-projects .loading-text,
+.page-projects .no-images {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px;
+    font-size: 1.3rem;
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+.page-projects .no-images {
+    padding: 80px 20px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.page-projects .no-images i {
+    font-size: 60px;
+    margin-bottom: 20px;
+    display: block;
+    color: var(--primary-accent);
+}
+
+/* FOOTER */
+.page-projects footer {
+    background: linear-gradient(135deg, var(--primary-dark), #34495E);
+    color: var(--bg-white);
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+    border-top: 6px solid var(--primary-accent);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== ДЕСКТОПНАЯ ВЕРСИЯ (969px и выше) ===== */
+@media (min-width: 969px) {
+    .page-projects .nav-buttons {
+        justify-content: space-between;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 40px;
+        pointer-events: none;
+    }
+    
+    .page-projects .nav-btn {
+        pointer-events: auto;
+        z-index: 1;
+    }
+    
+    .page-projects .nav-btn:first-child {
+        align-self: flex-start;
+    }
+    
+    .page-projects .nav-btn:last-child {
+        align-self: flex-end;
+    }
+    
+    .page-projects .mobile-menu-toggle {
+        display: none;
+    }
+    
+    .page-projects .header-info p {
+        font-size: 0.95rem;
+        line-height: 1.3;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 968px) ===== */
+@media (max-width: 968px) {
+    .page-projects .nav-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        padding-bottom: 0.5rem;
+        min-height: 80px;
+    }
+    
+    .page-projects .nav-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    .page-projects .nav-btn {
+        flex: 1;
+        min-width: 130px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        text-align: center;
+        white-space: normal; /* ОБНОВЛЕНИЕ: разрешаем перенос текста */
+        word-wrap: break-word; /* ОБНОВЛЕНИЕ: разрешаем разрыв слов */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        line-height: 1.1;
+    }
+    
+    /* ИКОНКИ В КНОПКАХ - ВСЕГДА ВИДНЫ (как на странице video.css) */
+    .page-projects .nav-btn i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        min-width: 12px;
+    }
+    
+    .page-projects .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        order: 3;
+        margin-top: 0.5rem;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        align-self: center;
+    }
+    
+    .page-projects .mobile-menu-toggle i {
+        margin-right: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .page-projects .header-info {
+        margin: 0;
+        order: 2;
+        width: 100%;
+    }
+    
+    .page-projects .header-info h1 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        margin-top: 0.3rem;
+    }
+    
+    .page-projects .header-info p {
+        font-size: 0.85rem;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+    
+    /* ФИЛЬТРЫ ПОРТФОЛИО - МОБИЛЬНАЯ ВЕРСИЯ */
+    .page-projects .portfolio-filters {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 0.8rem 1rem;
+        background: var(--bg-white);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-15px);
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        border-top: none;
+        border-radius: 0 0 12px 12px;
+        z-index: 99;
+        margin-bottom: 0;
+    }
+    
+    .page-projects .portfolio-filters.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        max-height: 400px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        margin-bottom: 20px;
+    }
+    
+    .page-projects .filter-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .page-projects .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ 768px */
+@media (max-width: 768px) {
+    .page-projects .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .page-projects .portfolio-item img {
+        height: 200px;
+    }
+
+    .page-projects .lightbox .preview {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+        gap: 16px;
+        padding-top: 90px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .page-projects .lightbox .viewer button.prev,
+    .page-projects .lightbox .viewer button.next {
+        width: 55px;
+        height: 55px;
+        font-size: 35px;
+    }
+    
+    .page-projects .lightbox .viewer button.prev {
+        left: 15px;
+    }
+    
+    .page-projects .lightbox .viewer button.next {
+        right: 15px;
+    }
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ 480px */
+@media (max-width: 480px) {
+    .page-projects .portfolio-filters {
+        padding: 0.6rem 0.8rem;
+        gap: 6px;
+    }
+    
+    .page-projects .filter-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        max-width: 260px;
+    }
+    
+    .page-projects .nav-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        min-width: 100px;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.1;
+    }
+    
+    /* ИКОНКИ МЕНЬШЕ, НО ВСЕ ЕЩЕ ВИДНЫ (как на странице video.css) */
+    .page-projects .nav-btn i {
+        font-size: 0.7rem;
+    }
+    
+    .page-projects .mobile-menu-toggle {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .page-projects .mobile-menu-toggle i {
+        margin-right: 4px;
+        font-size: 0.85rem;
+    }
+    
+    .page-projects .header-info h1 {
+        font-size: 1.3rem;
+    }
+    
+    .page-projects .header-info p {
+        font-size: 0.85rem;
+    }
+    
+    .page-projects .portfolio-item img {
+        height: 180px;
+    }
+    
+    .page-projects .lightbox .preview {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 120px));
+        gap: 12px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .page-projects .media-thumbnail img {
+        height: 120px;
+    }
+    
+    .page-projects #viewerImage,
+    .page-projects #viewerVideo {
+        max-width: 95%;
+        padding: 10px;
+    }
+    
+    .page-projects .lightbox .close {
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+    }
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ 375px */
+@media (max-width: 375px) {
+    .page-projects .nav-btn {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.65rem;
+        gap: 0.2rem;
+        min-width: 90px;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.1;
+    }
+    
+    /* ИКОНКИ ЕЩЕ МЕНЬШЕ, НО ВСЕ ЕЩЕ ВИДНЫ (как на странице video.css) */
+    .page-projects .nav-btn i {
+        font-size: 0.65rem;
+    }
+    
+    .page-projects .mobile-menu-toggle {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .page-projects .mobile-menu-toggle i {
+        font-size: 0.7rem;
+    }
+}
+
+/* Анимация загрузки */
+.page-projects img[loading] {
+    background: linear-gradient(90deg, var(--neutral-sand) 25%, var(--neutral-beige) 50%, var(--neutral-sand) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

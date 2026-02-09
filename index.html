@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.12 Строительная компания - Главная</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+    <link rel="icon" href="img/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body class="page-home">
+
+    <!-- Фиксированный фон -->
+    <div id="home-bg"></div>
+
+    <header>
+        <nav>
+            <div class="logo"><img src="img/Логотип Гошко.webp" alt="Logo"></div>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас<i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#directions">Основные направления</a></li>
+                        <li><a href="page_Our_projects.html">Портфолио</a></li>
+                    </ul>
+                </li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#information">Информация<i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="page_Technologies.html">Технологии и расчёты</a></li>
+                        <li><a href="page_Video.html">Информационное видео</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Контакты</a></li>
+                <li><a href="https://t.me/alexgoshko_SP" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" width="30">
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+        <!-- Текст главной страницы (скроллится) -->
+        <div class="home-content">
+            <h1>Строим будущее вместе</h1>
+            <p>Претворяя ваши идеи в реальность уже сегодня</p>
+        </div>
+
+        <!-- Контент, который наезжает на фиксированный фон -->
+        <div class="content-overlay">
+            <!-- Секция About -->
+            <section id="about">
+                <h2>Опыт и проекты</h2>
+                <p>В строительной сфере — около 30 лет практического опыта. Выполнены проекты различного уровня сложности: от ремонта квартир и частных домов до строительства каркасных зданий, спортивных залов, офисных помещений, комплекса бассейнов и реконструкции объектов, включая учебные центры с полноценными классами и инфраструктурой.</p>
+                <p>Работа строится на внимании к деталям, уважении к пожеланиям заказчика и строгом соблюдении технологий. Используются современные материалы и проверенные решения, что обеспечивает надёжность и долговечность результата.</p>
+                <p>Важно, чтобы люди, обращаясь, получали не просто услугу, а уверенность, что всё будет сделано правильно.</p>
+            </section>
+
+            <!-- Секция Основные направления -->
+            <section id="directions">
+                <h2>Основные направления</h2>
+                
+                <div class="directions-grid">
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-house-chimney"></i>
+                        </div>
+                        <h3>Строительство домов</h3>
+                        <p>Полный цикл до сдачи под ключ</p>
+                    </div>
+
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Ремонт и реконструкция</h3>
+                        <p>Капитальный ремонт и перепланировка любой сложности</p>
+                    </div>
+
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>Каркасное строительство</h3>
+                        <p>Современные быстровозводимые технологии</p>
+                    </div>
+
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>Строительство спортивных площадок</h3>
+                        <p>Строительство игровых, спортивных и тренировочных зон</p>
+                    </div>
+
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-swimming-pool"></i>
+                        </div>
+                        <h3>Строительство бассейнов</h3>
+                        <p>Строительство бассейнов под ключ</p>
+                    </div>
+
+                    
+
+                    <div class="direction-card">
+                        <div class="direction-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>Благоустройство территории</h3>
+                        <p>Создание гармоничного пространства вокруг дома</p>
+                    </div>
+                </div>
+                
+                <!-- Кнопка портфолио -->
+                <div class="btn-container" style="margin-top: 40px;">
+                    <a href="page_Our_projects.html" class="btn-portfolio">Смотреть реализованные проекты</a>
+                </div>
+            </section>
+
+                    <!-- Секция Services -->
+            <section id="services">
+                <h2>Услуги</h2>
+                <div class="services-hierarchy">
+                    <!-- 1. Бетонные работы -->
+                    <div class="service-main-category">
+                        <div class="main-category-header">
+                            <i class="fas fa-cubes"></i>
+                            <h3>Бетонные работы</h3>
+                            
+                        </div>
+                        <div class="subcategory-grid">
+                            <div class="subcategory">
+                                <h4>Фундаменты и колонны</h4>
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Фундаменты для домов и строений</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Фундаменты под заборы и ограждения</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Колонны и несущие конструкции</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="subcategory">
+                                <h4>Конструкции</h4>
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Монолитные и сборные стены</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Перекрытия</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Монолитные подпорные стенки</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="subcategory">
+                                <h4>Специализированные работы</h4>
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Отмостки и пешеходные зоны</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Бетонировка чаш бассейнов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Мелкие наружные бетонные работы</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Любые монолитные конструкции по проекту</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Работы с полами -->
+                    <div class="service-main-category">
+                        <div class="main-category-header">
+                            <i class="fas fa-square"></i>
+                            <h3>Работы с полами</h3>
+                            
+                        </div>
+                        <div class="subcategory-grid">
+                            <div class="subcategory">
+                                <h4>Бетонные / промышленные полы</h4>
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#polished-frezering" class="service-item-link">
+                                        <span>Фрезеровка бетонных полов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#polished-grinding" class="service-item-link">
+                                        <span>Шлифовка бетонных полов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#polished-polishing" class="service-item-link">
+                                        <span>Полировка бетонных полов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#terrazzo-floors" class="service-item-link">
+                                        <span>Устройство традиционных мозаичных полов терраццо</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#polished-concrete-info" class="service-item-link">
+                                        <span>Устройство полированных бетонных полов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#topping-floors" class="service-item-link">
+                                        <span>Устройство топпинговых бетонных полов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#concrete-works" class="service-item-link">
+                                        <span>Устройство бетонных полов (универсально)</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Стяжка пола</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Наливные полы</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="subcategory">
+                                <h4>Чистовые покрытия</h4>
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Облицовка пола плиткой</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Монтаж ламината</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Монтаж паркетной доски</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Монтаж виниловых покрытий (SPC/LVT)</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Укладка линолеума (бытовой / коммерческий)</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#floor-finishing" class="service-item-link">
+                                        <span>Подготовка основания под покрытия</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#demolition-works" class="service-item-link">
+                                        <span>Демонтаж старых покрытий</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Внутренняя отделка -->
+                    <div class="service-main-category">
+                        <div class="main-category-header">
+                            <i class="fas fa-paint-roller"></i>
+                            <h3>Внутренняя отделка</h3>
+                            
+                        </div>
+                        <div class="subcategory-grid">
+                            <div class="subcategory full-width">
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#interior-finishing" class="service-item-link">
+                                        <span>Монтаж ГКЛ-перегородок и потолков любой сложности</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#interior-finishing" class="service-item-link">
+                                        <span>Шпаклевка стен и потолков</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#interior-finishing" class="service-item-link">
+                                        <span>Малярные работы от кисточки и валика до безвоздушной окраски</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#interior-finishing" class="service-item-link">
+                                        <span>Декоративные отделочные работы (штукатурка, декоративные панели, покраска)</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Спецработы -->
+                    <div class="service-main-category">
+                        <div class="main-category-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Алмазная резка и демонтаж</h3>
+                            
+                        </div>
+                        <div class="subcategory-grid">
+                            <div class="subcategory full-width">
+                                <div class="service-items">
+                                    <a href="page_Technologies.html#diamond-cutting" class="service-item-link">
+                                        <span>Алмазная резка</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#diamond-drilling" class="service-item-link">
+                                        <span>Алмазное сверление</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#opening-device" class="service-item-link">
+                                        <span>Устройство и усиление проемов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#demolition-works" class="service-item-link">
+                                        <span>Демонтаж строительных конструкций</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#chasing-works" class="service-item-link">
+                                        <span>Устройство штроб и ниш</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                    <a href="page_Technologies.html#chasing-works" class="service-item-link">
+                                        <span>Резка деформационных швов</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Секция Information -->
+            <section id="information">
+                <h2>Информация</h2>
+                
+                <div class="info-cards">
+                    <!-- Карточка технологий -->
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Технологии и расчёты</h3>
+                        <p>Описания процессов и составы работ. Прайс-лист</p>
+                        <a href="page_Technologies.html" class="btn-tech">Смотреть</a>
+                    </div>
+                    
+                    <!-- Карточка видео -->
+                    <div class="info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h3>Информационное видео</h3>
+                        <p>Наглядные видео процессов выполнения различных видов работ</p>
+                        <a href="page_Video.html" class="btn-video">Смотреть</a>
+                    </div>
+                </div>
+                
+                <!-- Быстрые ссылки на основные технологии -->
+                <div class="quick-tech">
+                    <h3>Популярные виды услуг</h3>
+                    
+                    <div class="tech-cards-column">
+                        <!-- Карточка 1 -->
+                        <a href="page_Technologies.html#terrazzo-floors" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Мозаичные полы терраццо</h4>
+                                    <p>Классическая долговечная технология с декоративным покрытием</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <!-- Карточка 2 -->
+                        <a href="page_Technologies.html#industrial-floors" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Обработка бетонных полов</h4>
+                                    <p>Фрезеровка, шлифовка и полировка промышленных покрытий</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <!-- Карточка 3 -->
+                        <a href="page_Technologies.html#topping-floors" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Топпинговые бетонные полы</h4>
+                                    <p>Полы с повышенной износостойкостью</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <!-- Карточка 4 -->
+                        <a href="page_Technologies.html#diamond-cutting" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-cut"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Алмазная резка</h4>
+                                    <p>Резка стен, проемов и конструкций</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <!-- Карточка 5 -->
+                        <a href="page_Technologies.html#interior-finishing" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-paint-roller"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Внутренняя отделка</h4>
+                                    <p>Монтаж ГКЛ, шпаклевка, малярные работы</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                        
+                        <!-- Карточка 6 -->
+                        <a href="page_Technologies.html#concrete-works" class="tech-card-vertical">
+                            <div class="tech-card-header">
+                                <div class="tech-icon">
+                                    <i class="fas fa-cubes"></i>
+                                </div>
+                                <div class="tech-title">
+                                    <h4>Бетонные работы</h4>
+                                    <p>Фундаменты, монолитные конструкции, стяжки</p>
+                                </div>
+                            </div>
+                            <div class="tech-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Контакты (исправленные как вы просили) -->
+            <section id="contact" itemscope itemtype="https://schema.org/LocalBusiness">
+                <h2>Контакты</h2>
+                <p>Свяжитесь для обсуждения вашего проекта</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-item-content">
+                            <a href="https://maps.app.goo.gl/ввести точку координат" target="_blank">
+                                г. Полтава, ул. Европейская, 158
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-item-content">
+                            <a href="tel:+380978089845" itemprop="telephone">+38 (097) 808 9845</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-item-content">
+                            <a href="mailto:alexgoshko@gmail.com" itemprop="email">alexgoshkosp@gmail.com</a>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-item-content">
+                            <span>Пн-Пт: 9:00-18:00</span>
+                        </div>
+                    </div>-->
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Напишите нам</h3>
+
+                    <form id="contactForm" novalidate>
+                        <!-- Web3Forms ключ -->
+                        <input type="hidden" name="access_key" value="55507249-5c14-40e3-ac49-ff646974ee9b">
+                        <input type="hidden" name="subject" value="Новое сообщение с сайта">
+                        <input type="hidden" name="reply_to" value="">
+
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Ваше имя" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Ваш email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Ваше сообщение" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
+
+                <!-- Мессенджеры - горизонтальный блок -->
+                <div class="messengers-container">
+                    <h3>Или в мессенджер:</h3>
+                    <div class="messengers-wrapper">
+                        <a href="https://t.me/alexgoshko_SP" class="messenger-link telegram" target="_blank">
+                            <div class="messenger-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <span>Telegram</span>
+                        </a>
+                        
+                        <a href="https://wa.me/380978089845" class="messenger-link whatsapp" target="_blank">
+                            <div class="messenger-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <span>WhatsApp</span>
+                        </a>
+                        <!---->
+                        <a href="viber://chat?number=380978089845"
+                            class="messenger-link viber"
+                            title="Открывается в приложении Viber">
+                            <div class="messenger-icon">
+                                <i class="fab fa-viber"></i>
+                            </div>
+                            <span>Viber</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-content">
+                    
+                    <div class="footer-links">
+                        <a href="page_Technologies.html">Технологии и расчёты</a>
+                        <a href="page_Video.html">Видео технологий</a>
+                        <a href="page_Our_projects.html">Портфолио</a>
+                    </div>
+
+                    <p>&copy; 2026. Все права защищены.</p>
+                </div>
+            </footer>
+        </div>
+
+        <script type="module" src="js/app.js"></script>
+</body>
+</html>
