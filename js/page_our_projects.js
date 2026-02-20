@@ -70,6 +70,7 @@ export function initOurProjects() {
     basePath: "img/objects",
     maxImages: 40,
     withVideo: true,
-    videoNames: ["Finish.mp4", "Process.mp4", "Exterior.mp4"],
+    videoNames: ["finish.mp4", "Process.mp4", "Exterior.mp4"],
   });
 }
+
