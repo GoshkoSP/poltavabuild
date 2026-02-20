@@ -6,7 +6,7 @@ const DEFAULTS = {
   basePath: "img/objects",
   maxImages: 40,
   withVideo: true,
-  videoNames: ["Finish.mp4", "Process.mp4"], // Можно любые имена
+  videoNames: ["finish.mp4", "Process.mp4"], // Можно любые имена
 };
 
 export function initGallery(options = {}) {
@@ -322,3 +322,4 @@ export function initGallery(options = {}) {
   viewer.querySelector(".next")?.addEventListener("click", next);
   viewer.querySelector(".prev")?.addEventListener("click", prev);
 }
+
