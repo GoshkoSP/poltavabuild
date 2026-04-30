@@ -1,6 +1,6 @@
 // js/page-technologies-prices.js
 export function initPricesPage() {
-  // ===== CSV ПАРСЕР =====
+  // CSV parser
   function parseCSVRow(row) {
     const result = [];
     let current = "";
@@ -28,65 +28,17 @@ export function initPricesPage() {
     return result;
   }
 
-  // ===== ЗАГРУЗКА CSV =====
-  async function loadCSV(url) {
-    try {
-      console.log("Загрузка:", url);
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      let text = await res.text();
-      text = text.replace(/^\uFEFF/, "");
-      console.log(`Загружено ${text.length} символов из ${url}`);
-      return text;
-    } catch (e) {
-      console.error(`Ошибка загрузки ${url}:`, e);
-      throw e;
-    }
-  }
-
-  // ===== ФОРМАТИРОВАНИЕ ЦЕНЫ =====
-  function formatPriceForDisplay(price) {
-    if (!price) return "-";
-
-    let p = price.replace(/^['"]+|['"]+$/g, "").trim();
-
-    const hasFromPrefix = p.toLowerCase().startsWith("от");
-    const originalP = p;
-
-    p = p.replace(/^от\s*/i, "");
-
-    if (originalP.includes("%")) return originalP.replace(/^\+/, "");
-    if (originalP.includes("-") || originalP.includes("–")) {
-      const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
-      return withoutGryvnia;
-    }
-
-    const num = parseFloat(p.replace(",", ".").replace(/[^\d.-]/g, ""));
-
-    if (!isNaN(num)) {
-      const formattedNum = num.toFixed(2).replace(".", ",");
-      return hasFromPrefix ? "от " + formattedNum : formattedNum;
-    }
-
-    const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
-    return withoutGryvnia || originalP;
-  }
-
-  // ===== MAIN PRICE =====
+  // Проверяем наличие контейнера для таблицы
   const priceOutput = document.getElementById("price-output");
-  if (!priceOutput) {
-    console.log("Контейнер price-output не найден");
-    return;
-  }
+  if (!priceOutput) return; // Если элемента нет на странице - выходим
 
-  // Пробуем загрузить CSV файл из корня
-  loadCSV("./prices-main.csv")
+  // === Основной прайс (Main) ===
+  fetch("./prices-main.csv")
+    .then((response) => response.text())
     .then((csvText) => {
-      console.log("CSV загружен, начинаем парсинг...");
       priceOutput.innerHTML = "";
 
-      const rows = csvText.split(/\r?\n/);
-      console.log("Найдено строк:", rows.length);
+      const rows = csvText.split("\n");
 
       let currentCategory = "";
       let currentType = "";
@@ -95,6 +47,7 @@ export function initPricesPage() {
       let hasData = false;
       let currentCategoryContainer = null;
 
+      // КАРТА ЯКОРЕЙ ПО ПОДРАЗДЕЛАМ
       const sectionAnchorByType = {
         "Фрезеровка полов": "polished-frezering",
         "Шлифовка полов": "polished-grinding",
@@ -151,7 +104,9 @@ export function initPricesPage() {
         // === ПОДРАЗДЕЛ ===
         if (type && type !== "") {
           const isHighlightedType = type.startsWith("!!!");
-          const cleanType = isHighlightedType ? type.replace(/^!!!\s*/, "") : type;
+          const cleanType = isHighlightedType
+            ? type.replace(/^!!!\s*/, "")
+            : type;
 
           if (cleanType !== currentType) {
             closeCurrentTable();
@@ -159,11 +114,13 @@ export function initPricesPage() {
 
             const typeDiv = document.createElement("div");
             typeDiv.textContent = cleanType;
+
             typeDiv.style.textAlign = "center";
             typeDiv.style.fontWeight = "bold";
             typeDiv.style.fontSize = "18px";
             typeDiv.style.marginBottom = "15px";
 
+            // === ВИЗУАЛЬНОЕ ВЫДЕЛЕНИЕ ===
             if (isHighlightedType) {
               typeDiv.style.textAlign = "left";
               typeDiv.style.background = "#f5f5f5";
@@ -226,10 +183,10 @@ export function initPricesPage() {
 
           const serviceRow = document.createElement("tr");
           serviceRow.innerHTML = `
-            <td style="padding-left: 0.5em">${name}</td>
-            <td class="unit-col">${unit || "-"}</td>
-            <td class="price-col">${formattedPrice}</td>
-          `;
+                    <td style="padding-left: 0.5em">${name}</td>
+                    <td class="unit-col">${unit || "-"}</td>
+                    <td class="price-col">${formattedPrice}</td>
+                `;
           currentTbody.appendChild(serviceRow);
           hasData = true;
         }
@@ -238,9 +195,8 @@ export function initPricesPage() {
       closeCurrentTable();
 
       if (!hasData) {
-        priceOutput.innerHTML = '<div style="text-align:center;padding:40px;color:#666">Нет данных. Проверьте файл prices-main.csv</div>';
-      } else {
-        console.log("Прайс успешно загружен!");
+        priceOutput.innerHTML =
+          '<div style="text-align:center;padding:40px;color:#666">Нет данных</div>';
       }
 
       function createNewTable() {
@@ -248,16 +204,17 @@ export function initPricesPage() {
         currentTable.style.width = "100%";
         currentTable.style.borderCollapse = "collapse";
         currentTable.style.marginBottom = "25px";
+        // ДОБАВЛЕН КЛАСС ДЛЯ СТИЛЕЙ
         currentTable.className = "price-responsive-table";
 
         const thead = document.createElement("thead");
         thead.innerHTML = `
-          <tr>
-            <th style="text-align:left;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Наименование работ</th>
-            <th style="width:120px;text-align:center;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Ед.</th>
-            <th style="width:140px;text-align:right;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Цена, грн</th>
-          </tr>
-        `;
+                <tr>
+                    <th style="text-align:left;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Наименование работ</th>
+                    <th style="width:120px;text-align:center;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Ед.</th>
+                    <th style="width:140px;text-align:right;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Цена, грн</th>
+                </tr>
+            `;
         currentTable.appendChild(thead);
 
         currentTbody = document.createElement("tbody");
@@ -266,137 +223,149 @@ export function initPricesPage() {
       }
 
       function closeCurrentTable() {
-        if (currentTable && currentTbody && currentTbody.children.length === 0) {
+        if (currentTable && currentTbody.children.length === 0) {
           currentTable.remove();
         }
         currentTable = null;
         currentTbody = null;
       }
+
+      function formatPriceForDisplay(price) {
+        if (!price) return "-";
+
+        let p = price.replace(/^['"]+|['"]+$/g, "").trim();
+
+        // Проверяем, начинается ли с "от"
+        const hasFromPrefix = p.toLowerCase().startsWith("от");
+        const originalP = p;
+
+        // Убираем "от" для парсинга, но сохраняем его
+        p = p.replace(/^от\s*/i, "");
+
+        // Если есть знак % или дефис/тире
+        if (originalP.includes("%")) return originalP.replace(/^\+/, "");
+        if (originalP.includes("-") || originalP.includes("–")) {
+          // Для диапазонов убираем "грн" если есть
+          const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
+          return withoutGryvnia;
+        }
+
+        // Пытаемся распарсить число
+        const num = parseFloat(p.replace(",", ".").replace(/[^\d.-]/g, ""));
+
+        if (!isNaN(num)) {
+          // Форматируем число и НЕ добавляем "грн"
+          const formattedNum = num.toFixed(2).replace(".", ",");
+          return hasFromPrefix ? "от " + formattedNum : formattedNum;
+        }
+
+        // Если не число, убираем "грн" если есть и возвращаем
+        const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
+        return withoutGryvnia || originalP;
+      }
     })
     .catch((err) => {
       console.error("Ошибка загрузки Main:", err);
       if (priceOutput) {
-        priceOutput.innerHTML = '<div style="text-align:center;padding:40px;color:#e74c3c">Ошибка загрузки прайса. Убедитесь, что файл <strong>prices-main.csv</strong> находится в корне сайта.</div>';
+        priceOutput.innerHTML =
+          '<div style="text-align:center;padding:40px;color:#e74c3c">Ошибка загрузки. Файл prices-main.csv не найден</div>';
       }
     });
 
-  // ===== SPECIAL PRICE =====
-  const specialContainers = {
-    frez: document.getElementById("price-milling"),
-    shlif: document.getElementById("price-grinding"),
-    polir: document.getElementById("price-polishing"),
-  };
-
-  const hasSpecialPriceContainers = specialContainers.frez || specialContainers.shlif || specialContainers.polir;
+  // === Специальный прайс (special_price) ===
+  const hasSpecialPriceContainers =
+    document.getElementById("price-milling") ||
+    document.getElementById("price-grinding") ||
+    document.getElementById("price-polishing");
 
   if (hasSpecialPriceContainers) {
-    loadCSV("./prices-special.csv")
+    fetch("./prices-special.csv")
+      .then((response) => response.text())
       .then((csv) => {
-        console.log("Special CSV загружен, парсим...");
-        
-        const rows = csv
-          .split(/\r?\n/)
+        // Убираем BOM и лишние пробелы
+        const csvClean = csv.replace(/^\uFEFF/, "").trim();
+
+        // Разделяем строки, фильтруем пустые
+        const rows = csvClean
+          .split("\n")
           .filter((row) => row.trim())
-          .map((row) => parseCSVRow(row));
+          .map((r) => r.split(","));
 
-        // Убираем заголовок если есть
-        if (rows.length > 0 && rows[0][0] === "Категория") {
-          rows.shift();
-        }
+        // Убираем заголовок
+        if (rows.length > 0) rows.shift();
 
-        console.log("Спец-строк найдено:", rows.length);
-
-        // Очищаем контейнеры
-        for (let cat in specialContainers) {
-          if (specialContainers[cat]) {
-            specialContainers[cat].innerHTML = "";
-          }
-        }
-
-        // Группируем по категориям
-        const groupedData = {
-          frez: [],
-          shlif: [],
-          polir: []
+        // Контейнеры для таблиц на странице
+        const containers = {
+          frez: document.getElementById("price-milling"),
+          shlif: document.getElementById("price-grinding"),
+          polir: document.getElementById("price-polishing"),
         };
 
+        // Таблицы
+        const tables = {
+          frez: `<table class="price-table price-responsive-table"><thead><tr>
+                <th>Глубина / Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
+              </tr></thead><tbody>`,
+          shlif: `<table class="price-table price-responsive-table"><thead><tr>
+                <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
+              </tr></thead><tbody>`,
+          polir: `<table class="price-table price-responsive-table"><thead><tr>
+                <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
+              </tr></thead><tbody>`,
+        };
+
+        // Универсальная функция для очистки текста и форматирования цены
+        function cleanCell(str) {
+          if (!str) return "";
+          return str.replace(/^"+|"+$/g, "").trim();
+        }
+
+        function formatPrice(str) {
+          str = cleanCell(str);
+          return str.replace(/\d+(?:,\d+)?/g, (match) => {
+            const num = parseFloat(match.replace(",", "."));
+            return num.toFixed(2);
+          });
+        }
+
+        // Универсальный маппинг категорий
+        const categoryMap = {
+          frez: "frez",
+          shlif: "shlif",
+          polir: "polir",
+        };
+
+        // Проходим по всем строкам CSV
         rows.forEach((row) => {
           if (!row || row.length < 5) return;
-          
-          let category = row[0]?.toLowerCase().trim();
-          if (category === "frez" || category === "shlif" || category === "polir") {
-            groupedData[category].push({
-              col1: row[1] || "",
-              col2: row[2] || "",
-              col3: row[3] || "",
-              price: row[4] || ""
-            });
-          }
+
+          let category = cleanCell(row[0]).toLowerCase();
+          const mappedKey = categoryMap[category];
+          if (!mappedKey) return; // если категория не найдена, пропускаем
+
+          const col1 = cleanCell(row[1]);
+          const col2 = cleanCell(row[2]);
+          const col3 = cleanCell(row[3]);
+          const price = formatPrice(row[4]);
+
+          tables[mappedKey] += `
+          <tr>
+            <td>${col1}</td>
+            <td>${col2}</td>
+            <td>${col3}</td>
+            <td class="price-value">${price}</td>
+          </tr>
+        `;
         });
 
-        // Создаем таблицы для каждой категории
-        const headers = {
-          frez: ["Глубина / Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"],
-          shlif: ["Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"],
-          polir: ["Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"]
-        };
-
-        for (let cat of ["frez", "shlif", "polir"]) {
-          const container = specialContainers[cat];
-          if (container && groupedData[cat].length > 0) {
-            const table = document.createElement("table");
-            table.className = "price-table price-responsive-table";
-            
-            // Создаем заголовок
-            const thead = document.createElement("thead");
-            const headerRow = document.createElement("tr");
-            headers[cat].forEach(header => {
-              const th = document.createElement("th");
-              th.textContent = header;
-              headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-            
-            // Создаем тело таблицы
-            const tbody = document.createElement("tbody");
-            groupedData[cat].forEach(item => {
-              const tr = document.createElement("tr");
-              
-              const td1 = document.createElement("td");
-              td1.textContent = item.col1;
-              tr.appendChild(td1);
-              
-              const td2 = document.createElement("td");
-              td2.textContent = item.col2;
-              tr.appendChild(td2);
-              
-              const td3 = document.createElement("td");
-              td3.textContent = item.col3;
-              tr.appendChild(td3);
-              
-              const td4 = document.createElement("td");
-              td4.textContent = item.price;
-              td4.className = "price-value";
-              tr.appendChild(td4);
-              
-              tbody.appendChild(tr);
-            });
-            table.appendChild(tbody);
-            container.appendChild(table);
-            console.log(`Таблица ${cat} создана, строк: ${groupedData[cat].length}`);
-          } else if (container) {
-            container.innerHTML = '<p style="color:#999;text-align:center;">Нет данных</p>';
-          }
+        // Закрываем таблицы и вставляем на страницу
+        for (let cat in tables) {
+          tables[cat] += "</tbody></table>";
+          if (containers[cat]) containers[cat].innerHTML = tables[cat];
         }
       })
       .catch((err) => {
-        console.error("Ошибка special price:", err);
-        for (let cat in specialContainers) {
-          if (specialContainers[cat]) {
-            specialContainers[cat].innerHTML = '<p style="color:#e74c3c;text-align:center;">Ошибка загрузки</p>';
-          }
-        }
+        console.error("Ошибка загрузки special_price:", err);
       });
   }
 }
