@@ -1,6 +1,6 @@
 // js/page-technologies-prices.js
 export function initPricesPage() {
-  // CSV parser
+  // ===== CSV ПАРСЕР (универсальный) =====
   function parseCSVRow(row) {
     const result = [];
     let current = "";
@@ -28,19 +28,42 @@ export function initPricesPage() {
     return result;
   }
 
-  // Проверяем наличие контейнера для таблицы
-  const priceOutput = document.getElementById("price-output");
-  if (!priceOutput) return; // Если элемента нет на странице - выходим
+  // ===== ОБЩАЯ ЗАГРУЗКА CSV (с fallback) =====
+  async function loadCSV(url, fallbackUrl = null) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Fetch error");
+      let text = await res.text();
 
-  // === Основной прайс (Main) ===
-  fetch(
-   "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=0&single=true&output=csv" 
+      // 🔥 фикс BOM
+      text = text.replace(/^\uFEFF/, "");
+
+      return text;
+    } catch (e) {
+      console.warn("Ошибка загрузки, пробуем fallback:", e);
+
+      if (fallbackUrl) {
+        const res = await fetch(fallbackUrl);
+        let text = await res.text();
+        return text.replace(/^\uFEFF/, "");
+      }
+
+      throw e;
+    }
+  }
+
+  // ===== MAIN PRICE =====
+  const priceOutput = document.getElementById("price-output");
+  if (!priceOutput) return;
+
+  loadCSV(
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=0&single=true&output=csv",
+    "./prices-main.csv" // fallback
   )
-    .then((response) => response.text())
     .then((csvText) => {
       priceOutput.innerHTML = "";
 
-      const rows = csvText.split("\n");
+      const rows = csvText.split(/\r?\n/); // 🔥 фикс переносов
 
       let currentCategory = "";
       let currentType = "";
@@ -49,7 +72,6 @@ export function initPricesPage() {
       let hasData = false;
       let currentCategoryContainer = null;
 
-      // КАРТА ЯКОРЕЙ ПО ПОДРАЗДЕЛАМ
       const sectionAnchorByType = {
         "Фрезеровка полов": "polished-frezering",
         "Шлифовка полов": "polished-grinding",
@@ -74,7 +96,6 @@ export function initPricesPage() {
 
         if (!category && !name) continue;
 
-        // === КАТЕГОРИЯ ===
         if (category && category !== currentCategory) {
           closeCurrentTable();
 
@@ -83,32 +104,14 @@ export function initPricesPage() {
 
           const categoryContainer = document.createElement("div");
           categoryContainer.className = "price-category-container";
-          categoryContainer.style.border = "1px solid #ddd";
-          categoryContainer.style.padding = "15px";
-          categoryContainer.style.margin = "30px 0 20px";
-          categoryContainer.style.backgroundColor = "#fff";
+          categoryContainer.innerHTML = `<div style="text-align:center;font-weight:bold;font-size:20px;margin:25px 0 10px;border-bottom:2px solid #000">${category}</div>`;
 
-          const categoryTitle = document.createElement("div");
-          categoryTitle.style.textAlign = "center";
-          categoryTitle.style.fontWeight = "bold";
-          categoryTitle.style.fontSize = "20px";
-          categoryTitle.style.margin = "25px 0 10px";
-          categoryTitle.style.paddingBottom = "10px";
-          categoryTitle.style.borderBottom = "2px solid #000";
-          categoryTitle.textContent = category;
-
-          categoryContainer.appendChild(categoryTitle);
           priceOutput.appendChild(categoryContainer);
-
           currentCategoryContainer = categoryContainer;
         }
 
-        // === ПОДРАЗДЕЛ ===
         if (type && type !== "") {
-          const isHighlightedType = type.startsWith("!!!");
-          const cleanType = isHighlightedType
-            ? type.replace(/^!!!\s*/, "")
-            : type;
+          const cleanType = type.replace(/^!!!\s*/, "");
 
           if (cleanType !== currentType) {
             closeCurrentTable();
@@ -116,79 +119,23 @@ export function initPricesPage() {
 
             const typeDiv = document.createElement("div");
             typeDiv.textContent = cleanType;
-
-            typeDiv.style.textAlign = "center";
             typeDiv.style.fontWeight = "bold";
-            typeDiv.style.fontSize = "18px";
-            typeDiv.style.marginBottom = "15px";
-
-            // === ВИЗУАЛЬНОЕ ВЫДЕЛЕНИЕ ===
-            if (isHighlightedType) {
-              typeDiv.style.textAlign = "left";
-              typeDiv.style.background = "#f5f5f5";
-              typeDiv.style.padding = "10px 15px";
-              typeDiv.style.borderLeft = "4px solid #000";
-              typeDiv.style.color = "#000";
-            } else {
-              typeDiv.style.color = "#555";
-            }
+            typeDiv.style.marginBottom = "10px";
 
             currentCategoryContainer.appendChild(typeDiv);
           }
         }
 
-        // === ПОЯСНЕНИЯ (начинаются с !!!) ===
-        if (name.startsWith("!!!")) {
-          const explanationDiv = document.createElement("div");
-          explanationDiv.style.fontStyle = "italic";
-          explanationDiv.style.fontWeight = "bold";
-          explanationDiv.style.padding = "8px 0 8px 15px";
-          explanationDiv.style.margin = "5px 0 15px 0";
-          explanationDiv.style.fontSize = "14px";
-          explanationDiv.textContent = name.replace(/^!!!\s*/, "");
-
-          if (currentCategoryContainer) {
-            currentCategoryContainer.appendChild(explanationDiv);
-          } else {
-            priceOutput.appendChild(explanationDiv);
-          }
-          continue;
-        }
-
-        // === НАВИГАЦИОННАЯ СТРОКА ===
-        if (name.startsWith("→")) {
-          const anchorId = sectionAnchorByType[currentType];
-          if (anchorId) {
-            const navDiv = document.createElement("div");
-            navDiv.style.textAlign = "left";
-            navDiv.style.margin = "10px 0 20px";
-            navDiv.style.paddingLeft = "0.5em";
-
-            const link = document.createElement("a");
-            link.href = `#${anchorId}`;
-            link.textContent = name.replace(/^→\s*/, "");
-            link.style.fontSize = "14px";
-            link.style.color = "#0066cc";
-            link.style.textDecoration = "underline";
-
-            navDiv.appendChild(link);
-            currentCategoryContainer.appendChild(navDiv);
-          }
-          continue;
-        }
-
-        // === УСЛУГА ===
-        if (name && name !== "") {
+        if (name && !name.startsWith("!!!") && !name.startsWith("→")) {
           if (!currentTable) createNewTable();
-
-          const formattedPrice = formatPriceForDisplay(price);
 
           const serviceRow = document.createElement("tr");
           serviceRow.innerHTML = `
-                    <td style="padding-left: 0.5em">${name}</td>
-                    <td class="unit-col">${unit || "-"}</td>
-                    <td class="price-col">${formattedPrice}</td>
-                `;
+            <td>${name}</td>
+            <td>${unit || "-"}</td>
+            <td>${formatPrice(price)}</td>
+          `;
+
           currentTbody.appendChild(serviceRow);
           hasData = true;
         }
@@ -197,181 +144,88 @@ export function initPricesPage() {
       closeCurrentTable();
 
       if (!hasData) {
-        priceOutput.innerHTML =
-          '<div style="text-align:center;padding:40px;color:#666">Нет данных</div>';
+        priceOutput.innerHTML = "Нет данных";
       }
 
       function createNewTable() {
         currentTable = document.createElement("table");
-        currentTable.style.width = "100%";
-        currentTable.style.borderCollapse = "collapse";
-        currentTable.style.marginBottom = "25px";
-        // ДОБАВЛЕН КЛАСС ДЛЯ СТИЛЕЙ
         currentTable.className = "price-responsive-table";
 
-        const thead = document.createElement("thead");
-        thead.innerHTML = `
-                <tr>
-                    <th style="text-align:left;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Наименование работ</th>
-                    <th style="width:120px;text-align:center;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Ед.</th>
-                    <th style="width:140px;text-align:right;padding:10px;border-bottom:2px solid #000;background:#f5f5f5">Цена, грн</th>
-                </tr>
-            `;
-        currentTable.appendChild(thead);
+        currentTable.innerHTML = `
+          <thead>
+            <tr>
+              <th>Наименование</th>
+              <th>Ед.</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        `;
 
-        currentTbody = document.createElement("tbody");
-        currentTable.appendChild(currentTbody);
+        currentTbody = currentTable.querySelector("tbody");
         currentCategoryContainer.appendChild(currentTable);
       }
 
       function closeCurrentTable() {
-        if (currentTable && currentTbody.children.length === 0) {
-          currentTable.remove();
-        }
         currentTable = null;
         currentTbody = null;
       }
 
-      function formatPriceForDisplay(price) {
-        if (!price) return "-";
-
-        let p = price.replace(/^['"]+|['"]+$/g, "").trim();
-
-        // Проверяем, начинается ли с "от"
-        const hasFromPrefix = p.toLowerCase().startsWith("от");
-        const originalP = p;
-
-        // Убираем "от" для парсинга, но сохраняем его
-        p = p.replace(/^от\s*/i, "");
-
-        // Если есть знак % или дефис/тире
-        if (originalP.includes("%")) return originalP.replace(/^\+/, "");
-        if (originalP.includes("-") || originalP.includes("–")) {
-          // Для диапазонов убираем "грн" если есть
-          const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
-          return withoutGryvnia;
-        }
-
-        // Пытаемся распарсить число
-        const num = parseFloat(p.replace(",", ".").replace(/[^\d.-]/g, ""));
-
-        if (!isNaN(num)) {
-          // Форматируем число и НЕ добавляем "грн"
-          const formattedNum = num.toFixed(2).replace(".", ",");
-          return hasFromPrefix ? "от " + formattedNum : formattedNum;
-        }
-
-        // Если не число, убираем "грн" если есть и возвращаем
-        const withoutGryvnia = originalP.replace(/\s*грн\.?\s*/gi, "").trim();
-        return withoutGryvnia || originalP;
+      function formatPrice(p) {
+        if (!p) return "-";
+        return p.replace(/\s*грн\.?/gi, "").trim();
       }
     })
-    .catch((err) => {
-      console.error("Ошибка загрузки Main:", err);
-      if (priceOutput) {
-        priceOutput.innerHTML =
-          '<div style="text-align:center;padding:40px;color:#e74c3c">Ошибка загрузки</div>';
-      }
+    .catch(() => {
+      priceOutput.innerHTML = "Ошибка загрузки прайса";
     });
 
-  // === Специальный прайс (special_price) ===
-  // === Специальный прайс (special_price) ===
-  const hasSpecialPriceContainers =
-    document.getElementById("price-milling") ||
-    document.getElementById("price-grinding") ||
-    document.getElementById("price-polishing");
+  // ===== SPECIAL PRICE =====
+  const containers = {
+    frez: document.getElementById("price-milling"),
+    shlif: document.getElementById("price-grinding"),
+    polir: document.getElementById("price-polishing"),
+  };
 
-  if (hasSpecialPriceContainers) {
-    fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=2137597371&single=true&output=csv"
+  if (containers.frez || containers.shlif || containers.polir) {
+    loadCSV(
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=2137597371&single=true&output=csv",
+      "./prices-special.csv"
     )
-      .then((response) => response.text())
       .then((csv) => {
-        // Убираем BOM и лишние пробелы
-        const csvClean = csv.replace(/^\uFEFF/, "").trim();
+        const rows = csv
+          .split(/\r?\n/)
+          .filter((r) => r.trim())
+          .map((r) => parseCSVRow(r));
 
-        // Разделяем строки, фильтруем пустые
-        const rows = csvClean
-          .split("\n")
-          .filter((row) => row.trim())
-          .map((r) => r.split(","));
+        rows.shift();
 
-        // Убираем заголовок
-        if (rows.length > 0) rows.shift();
-
-        // Контейнеры для таблиц на странице
-        const containers = {
-          frez: document.getElementById("price-milling"),
-          shlif: document.getElementById("price-grinding"),
-          polir: document.getElementById("price-polishing"),
-        };
-
-        // Таблицы
-        const tables = {
-          frez: `<table class="price-table price-responsive-table"><thead><tr>
-                <th>Глубина / Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-              </tr></thead><tbody>`,
-          shlif: `<table class="price-table price-responsive-table"><thead><tr>
-                <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-              </tr></thead><tbody>`,
-          polir: `<table class="price-table price-responsive-table"><thead><tr>
-                <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-              </tr></thead><tbody>`,
-        };
-
-        // Универсальная функция для очистки текста и форматирования цены
-        function cleanCell(str) {
-          if (!str) return "";
-          return str.replace(/^"+|"+$/g, "").trim();
-        }
-
-        function formatPrice(str) {
-          str = cleanCell(str);
-          return str.replace(/\d+(?:,\d+)?/g, (match) => {
-            const num = parseFloat(match.replace(",", "."));
-            return num.toFixed(2);
-          });
-        }
-
-        // Универсальный маппинг категорий
-        const categoryMap = {
-          frez: "frez",
-          shlif: "shlif",
-          polir: "polir",
-        };
-
-        // Проходим по всем строкам CSV
         rows.forEach((row) => {
-          if (!row || row.length < 5) return;
+          if (row.length < 5) return;
 
-          let category = cleanCell(row[0]).toLowerCase();
-          const mappedKey = categoryMap[category];
-          if (!mappedKey) return; // если категория не найдена, пропускаем
+          const cat = row[0]?.toLowerCase();
+          if (!containers[cat]) return;
 
-          const col1 = cleanCell(row[1]);
-          const col2 = cleanCell(row[2]);
-          const col3 = cleanCell(row[3]);
-          const price = formatPrice(row[4]);
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${row[4]}</td>
+          `;
 
-          tables[mappedKey] += `
-          <tr>
-            <td>${col1}</td>
-            <td>${col2}</td>
-            <td>${col3}</td>
-            <td class="price-value">${price}</td>
-          </tr>
-        `;
+          if (!containers[cat].querySelector("table")) {
+            containers[cat].innerHTML =
+              "<table><tbody></tbody></table>";
+          }
+
+          containers[cat]
+            .querySelector("tbody")
+            .appendChild(tr);
         });
-
-        // Закрываем таблицы и вставляем на страницу
-        for (let cat in tables) {
-          tables[cat] += "</tbody></table>";
-          if (containers[cat]) containers[cat].innerHTML += tables[cat];
-        }
       })
-      .catch((err) => {
-        console.error("Ошибка загрузки special_price:", err);
+      .catch(() => {
+        console.error("Ошибка special price");
       });
   }
 }
-// ===== все работает =====
