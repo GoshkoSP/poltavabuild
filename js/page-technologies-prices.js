@@ -28,7 +28,6 @@ export function initPricesPage() {
     return result;
   }
 
-  // Форматирование цены
   function formatPriceForDisplay(price) {
     if (!price) return "-";
 
@@ -54,22 +53,43 @@ export function initPricesPage() {
     return withoutGryvnia || originalP;
   }
 
-  // Загрузка CSV через прокси (обходит CORS)
-  function loadCSVviaProxy(url) {
-    // Используем бесплатный CORS-прокси
-    const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
-    return fetch(proxyUrl).then(response => response.text());
-  }
-
-  // Проверяем наличие контейнера
   const priceOutput = document.getElementById("price-output");
   if (!priceOutput) return;
 
-  // === ОСНОВНОЙ ПРАЙС ===
-  const MAIN_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=0&single=true&output=csv";
+  // ID Google таблицы
+  const SPREADSHEET_ID = "2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB";
   
-  loadCSVviaProxy(MAIN_URL)
-    .then((csvText) => {
+  // Загружаем данные через Google Sheets API (без CORS проблем)
+  function loadGoogleSheet(gid, callback) {
+    const url = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?gid=${gid}&single=true&output=csv`;
+    
+    // Используем fetch с режимом no-cors
+    fetch(url, { mode: 'no-cors' })
+      .then(response => response.text())
+      .then(csvText => callback(csvText))
+      .catch(() => {
+        // Если fetch не работает, создаем скрытый iframe
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = url;
+        document.body.appendChild(iframe);
+        
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+          priceOutput.innerHTML = '<div style="text-align:center;padding:40px;color:#e74c3c">Ошибка загрузки. Нажмите Enter в адресной строке для перезагрузки страницы</div>';
+        }, 3000);
+      });
+  }
+
+  // === ОСНОВНОЙ ПРАЙС (gid=0) ===
+  const mainUrl = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?gid=0&single=true&output=csv`;
+  
+  fetch(mainUrl)
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.text();
+    })
+    .then(csvText => {
       priceOutput.innerHTML = "";
       const rows = csvText.split(/\r?\n/);
 
@@ -104,7 +124,6 @@ export function initPricesPage() {
 
         if (!category && !name) continue;
 
-        // КАТЕГОРИЯ
         if (category && category !== currentCategory) {
           closeCurrentTable();
           currentCategory = category;
@@ -131,7 +150,6 @@ export function initPricesPage() {
           currentCategoryContainer = categoryContainer;
         }
 
-        // ПОДРАЗДЕЛ
         if (type && type !== "") {
           const isHighlightedType = type.startsWith("!!!");
           const cleanType = isHighlightedType ? type.replace(/^!!!\s*/, "") : type;
@@ -161,7 +179,6 @@ export function initPricesPage() {
           }
         }
 
-        // ПОЯСНЕНИЯ
         if (name.startsWith("!!!")) {
           const explanationDiv = document.createElement("div");
           explanationDiv.style.fontStyle = "italic";
@@ -170,16 +187,12 @@ export function initPricesPage() {
           explanationDiv.style.margin = "5px 0 15px 0";
           explanationDiv.style.fontSize = "14px";
           explanationDiv.textContent = name.replace(/^!!!\s*/, "");
-
           if (currentCategoryContainer) {
             currentCategoryContainer.appendChild(explanationDiv);
-          } else {
-            priceOutput.appendChild(explanationDiv);
           }
           continue;
         }
 
-        // НАВИГАЦИОННЫЕ ССЫЛКИ
         if (name.startsWith("→")) {
           const anchorId = sectionAnchorByType[currentType];
           if (anchorId) {
@@ -187,26 +200,21 @@ export function initPricesPage() {
             navDiv.style.textAlign = "left";
             navDiv.style.margin = "10px 0 20px";
             navDiv.style.paddingLeft = "0.5em";
-
             const link = document.createElement("a");
             link.href = `#${anchorId}`;
             link.textContent = name.replace(/^→\s*/, "");
             link.style.fontSize = "14px";
             link.style.color = "#0066cc";
             link.style.textDecoration = "underline";
-
             navDiv.appendChild(link);
             currentCategoryContainer.appendChild(navDiv);
           }
           continue;
         }
 
-        // УСЛУГА
         if (name && name !== "") {
           if (!currentTable) createNewTable();
-
           const formattedPrice = formatPriceForDisplay(price);
-
           const serviceRow = document.createElement("tr");
           serviceRow.innerHTML = `
             <td style="padding-left: 0.5em">${name}</td>
@@ -240,14 +248,13 @@ export function initPricesPage() {
           </tr>
         `;
         currentTable.appendChild(thead);
-
         currentTbody = document.createElement("tbody");
         currentTable.appendChild(currentTbody);
         currentCategoryContainer.appendChild(currentTable);
       }
 
       function closeCurrentTable() {
-        if (currentTable && currentTbody.children.length === 0) {
+        if (currentTable && currentTbody && currentTbody.children.length === 0) {
           currentTable.remove();
         }
         currentTable = null;
@@ -255,97 +262,82 @@ export function initPricesPage() {
       }
     })
     .catch((err) => {
-      console.error("Ошибка загрузки Main:", err);
-      if (priceOutput) {
-        priceOutput.innerHTML = '<div style="text-align:center;padding:40px;color:#e74c3c">Ошибка загрузки прайса</div>';
-      }
+      console.error("Ошибка:", err);
+      priceOutput.innerHTML = `
+        <div style="text-align:center;padding:40px">
+          <p style="color:#e74c3c">Не удалось загрузить прайс</p>
+          <p style="font-size:14px;color:#666">Проверьте настройки публикации Google Sheets:</p>
+          <ol style="text-align:left;display:inline-block;font-size:13px">
+            <li>Файл → Поделиться → Опубликовать в интернете</li>
+            <li>Выбрать лист "Main" → Опубликовать</li>
+            <li>Нажать "Опубликовать"</li>
+          </ol>
+        </div>
+      `;
     });
 
-  // === СПЕЦИАЛЬНЫЙ ПРАЙС ===
-  const hasSpecialPriceContainers =
-    document.getElementById("price-milling") ||
-    document.getElementById("price-grinding") ||
-    document.getElementById("price-polishing");
+  // === СПЕЦИАЛЬНЫЙ ПРАЙС (gid=2137597371) ===
+  const specialContainers = {
+    frez: document.getElementById("price-milling"),
+    shlif: document.getElementById("price-grinding"),
+    polir: document.getElementById("price-polishing"),
+  };
 
-  if (hasSpecialPriceContainers) {
-    const SPECIAL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-PcOUHHy_cgnRnXMUVDU8DOE2ScrrE4PplRj8Pqow1xE6mLQRobdOBxW4oWaGgQGM5x7cpMzeJsAB/pub?gid=2137597371&single=true&output=csv";
+  if (specialContainers.frez || specialContainers.shlif || specialContainers.polir) {
+    const specialUrl = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_ID}/pub?gid=2137597371&single=true&output=csv`;
     
-    loadCSVviaProxy(SPECIAL_URL)
-      .then((csv) => {
+    fetch(specialUrl)
+      .then(response => response.text())
+      .then(csv => {
         const csvClean = csv.replace(/^\uFEFF/, "").trim();
-        const rows = csvClean
-          .split("\n")
-          .filter((row) => row.trim())
-          .map((r) => r.split(","));
+        const rows = csvClean.split(/\r?\n/).filter(row => row.trim()).map(r => r.split(","));
+        if (rows.length > 0 && rows[0][0] === "Категория") rows.shift();
 
-        if (rows.length > 0) rows.shift();
+        // Очищаем контейнеры
+        Object.values(specialContainers).forEach(c => { if (c) c.innerHTML = ""; });
 
-        const containers = {
-          frez: document.getElementById("price-milling"),
-          shlif: document.getElementById("price-grinding"),
-          polir: document.getElementById("price-polishing"),
-        };
-
-        const tables = {
-          frez: `<table class="price-table price-responsive-table"><thead><tr>
-            <th>Глубина / Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-          </tr></thead><tbody>`,
-          shlif: `<table class="price-table price-responsive-table"><thead><tr>
-            <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-          </tr></thead><tbody>`,
-          polir: `<table class="price-table price-responsive-table"><thead><tr>
-            <th>Этап</th><th>Описание</th><th>Технология / Износ</th><th>Цена (грн/м²)</th>
-          <tr></thead><tbody>`,
-        };
-
-        function cleanCell(str) {
-          if (!str) return "";
-          return str.replace(/^"+|"+$/g, "").trim();
-        }
-
-        function formatPrice(str) {
-          str = cleanCell(str);
-          return str.replace(/\d+(?:,\d+)?/g, (match) => {
-            const num = parseFloat(match.replace(",", "."));
-            return num.toFixed(2);
-          });
-        }
-
-        const categoryMap = {
-          frez: "frez",
-          shlif: "shlif",
-          polir: "polir",
-        };
-
-        rows.forEach((row) => {
-          if (!row || row.length < 5) return;
-
-          let category = cleanCell(row[0]).toLowerCase();
-          const mappedKey = categoryMap[category];
-          if (!mappedKey) return;
-
-          const col1 = cleanCell(row[1]);
-          const col2 = cleanCell(row[2]);
-          const col3 = cleanCell(row[3]);
-          const price = formatPrice(row[4]);
-
-          tables[mappedKey] += `
-            <tr>
-              <td>${col1}</td>
-              <td>${col2}</td>
-              <td>${col3}</td>
-              <td class="price-value">${price}</td>
-            </tr>
-          `;
+        const grouped = { frez: [], shlif: [], polir: [] };
+        
+        rows.forEach(row => {
+          if (row.length < 5) return;
+          let cat = row[0]?.toLowerCase().replace(/"/g, '').trim();
+          if (grouped[cat]) {
+            grouped[cat].push({
+              col1: row[1]?.replace(/"/g, '') || "",
+              col2: row[2]?.replace(/"/g, '') || "",
+              col3: row[3]?.replace(/"/g, '') || "",
+              price: row[4]?.replace(/"/g, '') || ""
+            });
+          }
         });
 
-        for (let cat in tables) {
-          tables[cat] += "</tbody></table>";
-          if (containers[cat]) containers[cat].innerHTML = tables[cat];
+        const headers = {
+          frez: ["Глубина / Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"],
+          shlif: ["Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"],
+          polir: ["Этап", "Описание", "Технология / Износ", "Цена (грн/м²)"]
+        };
+
+        for (let cat of ["frez", "shlif", "polir"]) {
+          const container = specialContainers[cat];
+          if (container && grouped[cat].length > 0) {
+            const table = document.createElement("table");
+            table.className = "price-table price-responsive-table";
+            table.innerHTML = `<thead><tr>${headers[cat].map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody></tbody>`;
+            const tbody = table.querySelector("tbody");
+            grouped[cat].forEach(item => {
+              const row = tbody.insertRow();
+              row.insertCell(0).textContent = item.col1;
+              row.insertCell(1).textContent = item.col2;
+              row.insertCell(2).textContent = item.col3;
+              row.insertCell(3).textContent = item.price;
+              if (row.cells[3]) row.cells[3].className = "price-value";
+            });
+            container.appendChild(table);
+          } else if (container) {
+            container.innerHTML = '<p style="color:#999;text-align:center">Нет данных</p>';
+          }
         }
       })
-      .catch((err) => {
-        console.error("Ошибка загрузки special_price:", err);
-      });
+      .catch(err => console.error("Special price error:", err));
   }
 }
