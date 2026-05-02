@@ -34,7 +34,7 @@ export function initPricesPage() {
 
   // === Основной прайс (Main) ===
   fetch(
-    "https://script.google.com/macros/s/AKfycbyHkdvhMjtuhUV4_7Vz9eTo2z3okpWouf3LIc_dSwaZkcBrfBSUakBVg8EllSTG-I8/exec?gid=0",
+    "https://script.google.com/macros/s/AKfycbzpIFTd5EbHjP3G8vhW704LvcfLQ7aiYvT5gfXxOVvdJzSThdAnIyG5eo4dnV1hJLPv/exec?gid=0"
   )
     .then((response) => response.text())
     .then((csvText) => {
@@ -283,7 +283,7 @@ export function initPricesPage() {
 
   if (hasSpecialPriceContainers) {
     fetch(
-      "https://script.google.com/macros/s/AKfycbzX9TN-XOTXF6dHtxfy7FaxDeWl6qhjZXfEB1L-jRuOyPLE564ic84PA_09_BL4lVqq/exec?gid=2137597371",
+      "https://script.google.com/macros/s/AKfycbzpIFTd5EbHjP3G8vhW704LvcfLQ7aiYvT5gfXxOVvdJzSThdAnIyG5eo4dnV1hJLPv/exec?gid=2137597371"
     )
       .then((response) => response.text())
       .then((csv) => {
